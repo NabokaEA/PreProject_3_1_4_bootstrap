@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nabokae.DAO.UserRepository;
 import ru.nabokae.entity.User;
+import ru.nabokae.sequrity.UserDetailsImpl;
 
 import java.util.Optional;
 
@@ -53,6 +54,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByName(username);
-        return null;
+        if (user.isEmpty()){
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new UserDetailsImpl(user.get());
     }
 }

@@ -1,17 +1,14 @@
 package ru.nabokae.sequrity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import ru.nabokae.entity.User;
 
 import java.util.Collection;
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UserDetailsImpl implements org.springframework.security.core.userdetails.UserDetails {
 
     private final User user;
-
-    @Autowired
-    public UserDetails(User user) {
+    public UserDetailsImpl(User user) {
         this.user = user;
     }
 
@@ -51,7 +48,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return true;
     }
 
-    public User getUser(){
+    public User getUser() {
         return this.user;
     }
 }

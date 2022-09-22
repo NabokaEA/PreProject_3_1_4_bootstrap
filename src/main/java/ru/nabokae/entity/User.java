@@ -1,5 +1,7 @@
 package ru.nabokae.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,14 +10,19 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Long id;
-    @Column(nullable = false)
+    @Column(name = "name")
+    @NotEmpty(message = "Поле не должно быть пустым")
     String name;
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Column(name = "password")
+    private String password;
     @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(
             name="user_role",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="id")})
     private List<Role> roles;
 
     public List<Role> getRoles() {
@@ -33,10 +40,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Column(nullable = false)
-    private String password;
-
 
     public User(Long id, String name) {
         this.id = id;
