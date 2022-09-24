@@ -32,6 +32,13 @@ public class UserController {
         return "users";
     }
 
+    @GetMapping("/")
+    public String ListPageHome (Model model) {
+        logger.info("Запрошен корневой адрес");
+        model.addAttribute("usersAll", userService.findAll());
+        return "users";
+    }
+
     @GetMapping("/new")
     public String NewUserForm(Model model) {
         logger.info("Запрошена страница создания нового пользователя");
@@ -41,9 +48,9 @@ public class UserController {
 
     @PostMapping("/all")
     public String UpdateUser(User user) {
-        logger.info("Запрошен обновленный список пользователей ");
+        logger.info("Запрошен обновленный список пользователей");
         userService.save(user);
-        return "redirect:/users/all";
+        return "redirect:/admin/all";
     }
 
     @GetMapping("/{id}")
@@ -57,7 +64,7 @@ public class UserController {
     public String EditUserForm(@PathVariable("id") Long id) {
         logger.info("Запрошена страница удаления пользователя c id={}", id);
         userService.delete(id);
-        return "redirect:/users/all";
+        return "redirect:/admin/all";
     }
 
 }
