@@ -21,8 +21,8 @@ public class User {
     @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(
             name="user_role",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="id")})
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles;
 
     public List<Role> getRoles() {

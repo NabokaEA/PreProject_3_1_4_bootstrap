@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.nabokae.entity.User;
 import ru.nabokae.service.UserService;
 
+import java.security.Principal;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -26,9 +28,10 @@ public class UserController {
 
 
     @GetMapping("/all")
-    public String ListPage(Model model) {
+    public String ListPage(Model model, Principal principal) {
         logger.info("Запрошен список пользьзовантелей");
         model.addAttribute("usersAll", userService.findAll());
+       // model.addAttribute("Principal",principal);
         return "users";
     }
 
