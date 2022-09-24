@@ -6,25 +6,35 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.nabokae.DAO.RoleRepository;
 import ru.nabokae.DAO.UserRepository;
+import ru.nabokae.entity.Role;
 import ru.nabokae.entity.User;
 import ru.nabokae.sequrity.UserDetailsImpl;
 
+import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
+    private final EntityManager em;
+
+    private final RoleRepository roleRepository;
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository repo) {
+    public UserServiceImpl(EntityManager em, RoleRepository roleRepository, UserRepository repo) {
+        this.em = em;
+        this.roleRepository = roleRepository;
         this.userRepository = repo;
     }
 
     @Transactional
     @Override
     public void save(User user) {
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         userRepository.save(user);
     }
 

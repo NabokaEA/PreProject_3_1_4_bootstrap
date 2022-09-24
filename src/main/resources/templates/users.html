@@ -48,6 +48,7 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Name</th>
+          <th scope="col">Authorities</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -58,7 +59,7 @@
         <tr th:each="user : ${usersAll}">
           <th scope="row" th:text="${user.id}" >1</th>
           <td th:text="${user.name}">Alex</td>
-          <td th:text="Principal">Alex</td>
+          <td th:text="${roles}">Alex</td>
 
           <td>
             <a class="btn btn-success" th:href="@{/admin/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a>
