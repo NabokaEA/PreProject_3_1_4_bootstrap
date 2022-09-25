@@ -33,12 +33,12 @@ public class UserController {
 
     @GetMapping("/all")
     public String ListPage(Model model) {
-        logger.info("Запрошен список пользьзовантелей");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        logger.info("Запрошен список пользьзователей");
+        //  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("usersAll", userService.findAll());
-        model.addAttribute("Auth", authentication);
-        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        model.addAttribute("roles", roles.stream().findFirst().toString());
+       // model.addAttribute("Auth", authentication);
+       // Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+       // model.addAttribute("roles", roles.stream().findFirst().toString());
         return "users";
     }
 

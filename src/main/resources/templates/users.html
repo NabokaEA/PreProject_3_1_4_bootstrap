@@ -30,7 +30,7 @@
       </li>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
+    <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
       <button class="btn btn-outline-success my-2 my-sm-0">Logout</button>
     </form>
   </div>
@@ -48,7 +48,7 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Name</th>
-          <th scope="col">Authorities</th>
+<!--          <th scope="col">Authorities</th>-->
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -59,7 +59,7 @@
         <tr th:each="user : ${usersAll}">
           <th scope="row" th:text="${user.id}" >1</th>
           <td th:text="${user.name}">Alex</td>
-          <td th:text="${roles}">Alex</td>
+<!--          <td th:text="${roles}">Alex</td>-->
 
           <td>
             <a class="btn btn-success" th:href="@{/admin/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a>
@@ -76,7 +76,9 @@
     </div>
   </div>
 </div>
-
+<form class="form-inline my-2 my-lg-0" th:action="@{/Userhome}" method="post">
+  <button class="btn btn-outline-success my-2 my-sm-0">Home Page</button>
+</form>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
