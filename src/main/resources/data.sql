@@ -2,7 +2,7 @@ delete from  users_roles;
 delete from  roles;
 delete from  users;
 
-INSERT INTO roles (id, role) VALUES
+INSERT INTO roles (id, name) VALUES
                                  (1, 'ROLE_ADMIN'),
                                  (2, 'ROLE_USER');
 
