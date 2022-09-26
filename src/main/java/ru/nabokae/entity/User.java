@@ -1,5 +1,7 @@
 package ru.nabokae.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
@@ -26,12 +28,12 @@ public class User {
     
     @Column(name="age")
     private int age;
-
-    @ManyToMany(cascade=CascadeType.MERGE,fetch = FetchType.EAGER)
-    /*@JoinTable(
-            name="user_role",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})*/
+    @Fetch(FetchMode.JOIN)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name="users_roles",
+            joinColumns={@JoinColumn(name="User_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="Roles_id", referencedColumnName="id")})
     private Set<Role> roles;
 
     public Set<Role> getRoles() {
