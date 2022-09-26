@@ -1,5 +1,6 @@
 package ru.nabokae.entity;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.Set;
@@ -10,13 +11,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
     @Column(name = "name")
     @NotEmpty(message = "Поле не должно быть пустым")
-    String name;
+    private String name;
     @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name = "password")
     private String password;
+
+    @Email
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Column(name="email")
+    private String email;
+    
+    @Column(name="age")
+    private int age;
+
     @ManyToMany(cascade=CascadeType.MERGE,fetch = FetchType.EAGER)
     /*@JoinTable(
             name="user_role",
@@ -64,4 +74,21 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 }

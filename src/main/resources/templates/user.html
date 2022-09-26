@@ -51,6 +51,16 @@
           <input type="text" id="password"  class="form-control" th:field="*{password}" placeholder="Enter password" >
           <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
         </div>
+        <div class="form-group">
+          <label for="name">E-mail</label>
+          <input type="text" id="email"  class="form-control" th:field="*{email}" placeholder="Enter E-mail" >
+          <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+        </div>
+        <div class="form-group">
+          <label for="name">Password</label>
+          <input type="text" id="age"  class="form-control" th:field="*{age}" placeholder="Enter age" >
+          <p class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
