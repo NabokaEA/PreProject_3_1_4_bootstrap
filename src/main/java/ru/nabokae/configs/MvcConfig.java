@@ -15,10 +15,8 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    private ApplicationContext context;
-
-    @Autowired
-    public void setContext(ApplicationContext context) {
+    private final ApplicationContext context;
+    public MvcConfig(ApplicationContext context) {
         this.context = context;
     }
 
