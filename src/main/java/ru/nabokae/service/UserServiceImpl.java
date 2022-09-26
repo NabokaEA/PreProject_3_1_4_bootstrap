@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
+@Transactional (readOnly = true)
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final EntityManager em;
 
@@ -38,13 +39,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Iterable<User> findAll() {
         return userRepository.findAll();
@@ -58,7 +57,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Optional<User> findByName(String name) {
-        return userRepository.findByName(name);
+
+        Optional<User> user = userRepository.findByName(name);
+        if (user.isEmpty()){
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
     @Override
