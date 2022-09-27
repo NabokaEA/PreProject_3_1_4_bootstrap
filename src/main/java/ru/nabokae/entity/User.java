@@ -17,6 +17,10 @@ public class User {
     @Column(name = "name")
     @NotEmpty(message = "Поле не должно быть пустым")
     private String name;
+
+    @Column(name = "lastname")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    private String lastName;
     @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name = "password")
     private String password;
@@ -91,6 +95,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 }

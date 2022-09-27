@@ -26,14 +26,14 @@ public class AdminController {
     public String ListPage(Model model) {
         logger.info("Запрошен список пользьзователей");
         model.addAttribute("usersAll", userService.findAll());
-        return "users";
+        return "BS_admin_page";
     }
 
     @GetMapping("/")
     public String ListPageHome(Model model) {
         logger.info("Запрошен корневой адрес");
         model.addAttribute("usersAll", userService.findAll());
-        return "users";
+        return "BS_admin_page";
     }
 
     @GetMapping("/new")
