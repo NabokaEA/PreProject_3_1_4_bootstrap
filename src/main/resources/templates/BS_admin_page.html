@@ -30,7 +30,7 @@
 <!-- responsive equal width cols, can be sm, md, lg, or xl -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2">
             <div>
                 <button type="button" id="toggle" class="btn btn-primary btn-block mt-2 active" autocomplete="of">
                     Admin
@@ -41,7 +41,7 @@
             </div>
 
         </div>
-        <div class="col-md-10">
+        <div class="col-lg-10 my-2">
             <br>
             <h2>
                 <p class="font-weight">Admin panel</p>
@@ -85,13 +85,12 @@
                                     <td th:text="${user.lastName}">Alex</td>
                                     <td th:number="${user.age}">Alex</td>
                                     <td th:text="${user.email}">Alex</td>
-                                    <td th:text="${user.roles}">Alex</td>
+                                    <td th:text="${authentication.getAuthorities()}">Alex</td>
                                     <td>
-                                        <a class="btn btn-info btn-lg" th:href="@{/admin/{id}(id=${user.id})}"></a>
+                                    <a class="btn btn-info text-white" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-danger btn-lg"
-                                           th:href="@{/admin/{id}/delete(id=${user.id})}"></a>
+                                        <a class="btn btn-danger text-white" th:href="@{/admin/{id}/delete(id=${user.id})}">Delete</a>
                                     </td>
                                 </tr>
                                 </tbody>
