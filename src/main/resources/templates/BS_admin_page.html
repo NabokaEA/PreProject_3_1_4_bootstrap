@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
 <!-- responsive equal width cols, can be sm, md, lg, or xl -->
 <div class="container-fluid mr=0">
     <div class="row no-gutters">
-        <div class="col-lg-2">
+        <div class="col-2">
             <div>
                 <button type="button" id="toggle" class="btn btn-primary btn-block mt-2 active" autocomplete="of">
                     Admin
@@ -41,7 +41,7 @@
             </div>
 
         </div>
-        <div class="col-lg-10">
+        <div class="col-10 bg-light">
             <div class="container-fluid ml-0">
                 <div>
                     <div>
@@ -90,7 +90,17 @@
                                         <td th:text="${user.email}">Alex</td>
                                         <td th:text="${authentication.getAuthorities()}">Alex</td>
                                         <td>
-                                            <a class="btn btn-info text-white" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
+                                            <a class="btn btn-info text-white" data-toggle="modal" data-target="#myModal" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
+                                            <div id="myModal" class = "modal fade">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3>Edit User</h3>
+                                                            <button class="close" data-dismiss="modal">x</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <a class="btn btn-danger text-white"

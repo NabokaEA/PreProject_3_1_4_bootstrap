@@ -19,14 +19,12 @@ public class User {
     private String name;
 
     @Column(name = "lastname")
-    @NotEmpty(message = "Поле не должно быть пустым")
     private String lastName;
     @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name = "password")
     private String password;
 
     @Email
-    @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name="email")
     private String email;
     
