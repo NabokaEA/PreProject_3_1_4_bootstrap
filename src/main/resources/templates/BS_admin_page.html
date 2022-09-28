@@ -28,8 +28,8 @@
 </nav>
 
 <!-- responsive equal width cols, can be sm, md, lg, or xl -->
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid mr=0">
+    <div class="row no-gutters">
         <div class="col-lg-2">
             <div>
                 <button type="button" id="toggle" class="btn btn-primary btn-block mt-2 active" autocomplete="of">
@@ -41,63 +41,68 @@
             </div>
 
         </div>
-        <div class="col-lg-10 my-2">
-            <br>
-            <h2>
-                <p class="font-weight">Admin panel</p>
-            </h2>
-
-            <div class="container">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#userTable"> Users table </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#newUser"> New User </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="userTable">
-                        <div class="table-responsive">
-                            <br>
-                            <caption>
-                                <h4>
-                                    <p class="font-weight"> Users list </p>
-                                </h4>
-                            </caption>
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">LastName</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">E-mail</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="user : ${usersAll}">
-                                    <th scope="row" th:text="${user.id}">1</th>
-                                    <td th:text="${user.name}">Alex</td>
-                                    <td th:text="${user.lastName}">Alex</td>
-                                    <td th:number="${user.age}">Alex</td>
-                                    <td th:text="${user.email}">Alex</td>
-                                    <td th:text="${authentication.getAuthorities()}">Alex</td>
-                                    <td>
-                                    <a class="btn btn-info text-white" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-danger text-white" th:href="@{/admin/{id}/delete(id=${user.id})}">Delete</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="col-lg-10">
+            <div class="container-fluid ml-0">
+                <div>
+                    <div>
+                        <h2>
+                            <p class="font-weight mt-2 ml-0">Admin panel</p>
+                        </h2>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="newUser">New User</div>
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#userTable"> Users table </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#newUser"> New User </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="userTable">
+                            <div class="table-responsive">
+                                <br>
+                                <caption>
+                                    <h4>
+                                        <p class="font-weight"> Users list </p>
+                                    </h4>
+                                </caption>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">LastName</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : ${usersAll}">
+                                        <th scope="row" th:text="${user.id}">1</th>
+                                        <td th:text="${user.name}">Alex</td>
+                                        <td th:text="${user.lastName}">Alex</td>
+                                        <td th:number="${user.age}">Alex</td>
+                                        <td th:text="${user.email}">Alex</td>
+                                        <td th:text="${authentication.getAuthorities()}">Alex</td>
+                                        <td>
+                                            <a class="btn btn-info text-white" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger text-white"
+                                               th:href="@{/admin/{id}/delete(id=${user.id})}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="newUser">New User</div>
+                    </div>
                 </div>
             </div>
         </div>
