@@ -60,7 +60,7 @@ public class AdminController {
     public String EditUserForm(@PathVariable("id") Long id, Model model) {
         logger.info("Запрошена страница редактирования пользователя");
         model.addAttribute("user", userService.findById(id));
-        return "user";
+        return "BS_admin_page::view";
     }
 
     @GetMapping("/{id}/delete")
