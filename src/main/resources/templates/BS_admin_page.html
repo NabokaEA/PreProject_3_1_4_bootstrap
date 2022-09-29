@@ -88,7 +88,7 @@
                                         <td th:text="${user.lastName}">Alex</td>
                                         <td th:number="${user.age}">Alex</td>
                                         <td th:text="${user.email}">Alex</td>
-                                        <td th:text="${authentication.getAuthorities()}">Alex</td>
+                                        <td th:text="${authentication}">Alex</td>
                                         <td>
                                             <a class="btn btn-info text-white" data-toggle="modal"
                                                data-target="#myModal" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>

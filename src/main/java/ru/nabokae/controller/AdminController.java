@@ -3,6 +3,7 @@ package ru.nabokae.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.nabokae.entity.User;
 import ru.nabokae.service.UserService;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -28,10 +34,13 @@ public class AdminController {
     @GetMapping("/all")
     public String ListPage(Model model) {
         logger.info("Запрошен список пользьзователей");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        HashSet<GrantedAuthority> hashSet=new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        String role = "";
+        for (GrantedAuthority gauth : hashSet) {
+            role = role +", "+gauth.getAuthority().substring(5);
+        }
         model.addAttribute("usersAll", userService.findAll());
-        model.addAttribute("authentication", authentication);
+        model.addAttribute("authentication", role);
         return "BS_admin_page";
     }
 
