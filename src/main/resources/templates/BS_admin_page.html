@@ -95,6 +95,9 @@
                                         <td th:text="${user.email}">Alex</td>
                                         <td th:text="${authentication}">Alex</td>
                                         <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#editModal">Edit user
+                                            </button>
                                             <a class="btn btn-info text-white" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
 
                                         </td>
@@ -105,15 +108,13 @@
                                     </tr>
                                     </tbody>
                                 </table>
-
-
-                                <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <form>
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">New user</h5>
+                                                    <h5 class="modal-title" id="ModalLabeledit">Edit user</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -124,7 +125,7 @@
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                                class="col-form-label">ID:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <input type="text" class="form-control" id="recipient-id">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
@@ -134,22 +135,80 @@
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                                class="col-form-label">lastName:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <input type="text" class="form-control" id="recipient-lastName">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                                class="col-form-label">age:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <input type="text" class="form-control" id="recipient-age">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                                class="col-form-label">email:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <input type="text" class="form-control" id="recipient-email">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
-                                                               class="col-form-label">Role:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                               class="col-form-label">role:</label>
+                                                        <input type="text" class="form-control" id="recipient-Role">
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <form>
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addModalLabel">New user</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">ID:</label>
+                                                        <input type="text" class="form-control" id="ID">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">name:</label>
+                                                        <input type="text" class="form-control" id="name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">lastName:</label>
+                                                        <input type="text" class="form-control" id="lastName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">age:</label>
+                                                        <input type="text" class="form-control" id="age">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">email:</label>
+                                                        <input type="text" class="form-control" id="email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                               class="col-form-label">role:</label>
+                                                        <input type="text" class="form-control" id="role">
                                                     </div>
 
 
