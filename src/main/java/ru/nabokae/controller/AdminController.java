@@ -37,7 +37,7 @@ public class AdminController {
         HashSet<GrantedAuthority> hashSet=new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         String role = "";
         for (GrantedAuthority gauth : hashSet) {
-            role = role +", "+gauth.getAuthority().substring(5);
+            role = role +" "+gauth.getAuthority().substring(5);
         }
         model.addAttribute("usersAll", userService.findAll());
         model.addAttribute("authentication", role);
@@ -69,7 +69,7 @@ public class AdminController {
     public String EditUserForm(@PathVariable("id") Long id, Model model) {
         logger.info("Запрошена страница редактирования пользователя");
         model.addAttribute("user", userService.findById(id));
-        return "BS_admin_page::view";
+        return "User";
     }
 
     @GetMapping("/{id}/delete")

@@ -15,16 +15,16 @@ public class User {
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
-    @NotEmpty(message = "Поле не должно быть пустым")
+//    @NotEmpty(message = "Поле не должно быть пустым")
     private String name;
 
     @Column(name = "lastname")
     private String lastName;
-    @NotEmpty(message = "Поле не должно быть пустым")
+//    @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name = "password")
     private String password;
 
-    @Email
+//    @Email
     @Column(name="email")
     private String email;
     

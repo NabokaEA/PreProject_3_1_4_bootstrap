@@ -86,74 +86,12 @@
                                         <th scope="row" th:text="${user.id}">1</th>
                                         <td th:text="${user.name}">Alex</td>
                                         <td th:text="${user.lastName}">Alex</td>
-                                        <td th:number="${user.age}">Alex</td>
+                                        <td th:text="${user.age}">Alex</td>
                                         <td th:text="${user.email}">Alex</td>
                                         <td th:text="${authentication}">Alex</td>
                                         <td>
-                                            <a class="btn btn-info text-white" data-toggle="modal"
-                                               data-target="#myModal" th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
-                                            <div id="myModal" class="modal fade"th:fragment="view">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3>Edit User</h3>
-                                                            <button class="close" data-dismiss="modal">x</button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="container">
-                                                                <div class="row py-2">
-                                                                    <div class="col-12">
-                                                                        <form th:action="@{/admin/all}" method="post"
-                                                                              th:object="${user}">
+                                            <a class="btn btn-info text-white"  th:href="@{/admin/{id}(id=${user.id})}">Edit</a>
 
-                                                                            <input type="hidden" id="id"
-                                                                                   th:text="*{id}">
-                                                                            <div class="form-group">
-                                                                                <label for="name">First name</label>
-                                                                                <input type="text" id="name"
-                                                                                       class="form-control"
-                                                                                       th:text="*{name}"
-                                                                                       placeholder="Enter name">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="name">Last name</label>
-                                                                                <input type="text" id="LastName"
-                                                                                       class="form-control"
-                                                                                       th:text="*{lastName}"
-                                                                                       placeholder="Enter Last name">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="name">Age</label>
-                                                                                <input type="text" id="age"
-                                                                                       class="form-control"
-                                                                                       th:text="*{age}"
-                                                                                       placeholder="Enter age">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="name">E-mail</label>
-                                                                                <input type="text" id="email"
-                                                                                       class="form-control"
-                                                                                       th:text="*{email}"
-                                                                                       placeholder="Enter E-mail">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="name">Password</label>
-                                                                                <input type="text" id="password"
-                                                                                       class="form-control"
-                                                                                       th:text="*{password}"
-                                                                                       placeholder="Enter password">
-                                                                            </div>
-                                                                            <button type="submit"
-                                                                                    class="btn btn-primary">Submit
-                                                                            </button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </td>
                                         <td>
                                             <a class="btn btn-danger text-white"
