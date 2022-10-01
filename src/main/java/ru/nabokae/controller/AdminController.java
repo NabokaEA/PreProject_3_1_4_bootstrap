@@ -8,10 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.nabokae.entity.User;
 import ru.nabokae.service.UserService;
 
@@ -34,10 +31,10 @@ public class AdminController {
     @GetMapping("/all")
     public String ListPage(Model model) {
         logger.info("Запрошен список пользьзователей");
-        HashSet<GrantedAuthority> hashSet=new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        HashSet<GrantedAuthority> hashSet = new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         String role = "";
         for (GrantedAuthority gauth : hashSet) {
-            role = role +" "+gauth.getAuthority().substring(5);
+            role = role + " " + gauth.getAuthority().substring(5);
         }
         model.addAttribute("usersAll", userService.findAll());
         model.addAttribute("authentication", role);
@@ -65,11 +62,13 @@ public class AdminController {
         return "redirect:/admin/all";
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public String EditUserForm(@PathVariable("id") Long id, Model model) {
         logger.info("Запрошена страница редактирования пользователя");
-        model.addAttribute("user", userService.findById(id));
-        return "User";
+     /*   model.addAttribute("user", userService.findById(id));
+        return "User";*/
+        return String.valueOf(userService.findById(id));
     }
 
     @GetMapping("/{id}/delete")

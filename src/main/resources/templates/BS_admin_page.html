@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <span class="navbar-text">
-                inline element
+                <p th:text="${authentication}"> роль </p>
             </span>
         </ul>
         <form class="form-inline mr-2 mr-lg-0" th:action="@{/logout}" method="post">
@@ -93,7 +93,7 @@
                                         <td th:text="${user.lastName}">Alex</td>
                                         <td th:text="${user.age}">Alex</td>
                                         <td th:text="${user.email}">Alex</td>
-                                        <td th:text="${authentication}">Alex</td>
+                                        <td th:text="${user.getRoles()}">Alex</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#editModal">Edit user
