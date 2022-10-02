@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokae.entity.User;
 import ru.nabokae.service.UserService;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 
 @Controller
@@ -38,6 +36,7 @@ public class AdminController {
         }
         model.addAttribute("usersAll", userService.findAll());
         model.addAttribute("authentication", role);
+
         return "BS_admin_page";
     }
 
