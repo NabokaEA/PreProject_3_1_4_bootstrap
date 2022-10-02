@@ -46,7 +46,7 @@ public class AdminController {
         model.addAttribute("usersAll", userService.findAll());
         return "BS_admin_page";
     }
-
+    @ResponseBody
     @GetMapping("/new")
     public String NewUserForm(Model model) {
         logger.info("Запрошена страница создания нового пользователя");
