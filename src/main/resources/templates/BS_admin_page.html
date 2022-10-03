@@ -72,18 +72,13 @@
                     </div>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="userTable">
-                            <div class="table-responsive">
+                            <td class="table-responsive">
                                 <br>
                                 <caption>
                                     <h4>
                                         <p class="font-weight"> Users list </p>
                                     </h4>
                                 </caption>
-
-                                <!--<button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#addModal">Add new
-                                </button>-->
-
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -104,82 +99,88 @@
                                         <td th:text="${user.lastName}">Alex</td>
                                         <td th:text="${user.age}">Alex</td>
                                         <td th:text="${user.email}">Alex</td>
-                                        <td th:text="${user.getRoles()}">Alex</td>
                                         <td>
-                                            <button type="button" class="btn btn-info text-white" data-toggle="modal"
-                                                    data-target="#editModal">Edit
-                                            </button>
+                                            <a th:each="role : ${user.getRoles()}" th:text="${role.getName()+' '}"/>
                                         </td>
                                         <td>
+                                            <button type="button"
+                                                    class="btn btn-info text-white"
+                                                    data-toggle="modal"
+                                                    data-row="${user}" data-target="#editModal"
+                                                    th:attr="data-target='#editModal'+${user.id}">Edit
+                                            </button>
+                                            <div class="modal fade" th:attr="id='editModal'+${user.id}"
+                                                 tabindex="-1"
+                                                 role="dialog">
+                                                <form th:action="@{/admin/all}" method="post">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ModalLabeledit">Edit
+                                                                    user</h5>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!--                                                                <input type="hidden" id="id" th:field="${user.id}" >-->
+                                                                <div class="form-group">
+                                                                    <label for="recipient-idEdit"
+                                                                           class="col-form-label">ID:</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="recipient-idEdit"
+                                                                           name="id">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-nameEdit"
+                                                                           class="col-form-label">name:</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="recipient-nameEdit"
+                                                                           name="name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-lastNameEdit"
+                                                                           class="col-form-label">lastName:</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="recipient-lastNameEdit"
+                                                                           name="lastName">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-ageEdit"
+                                                                           class="col-form-label">age:</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="recipient-ageEdit"
+                                                                           name="age">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-emailEdit"
+                                                                           class="col-form-label">email:</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="recipient-emailEdit"
+                                                                           name="email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Close
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
                                             <a class="btn btn-danger text-white"
                                                th:href="@{/admin/{id}/delete(id=${user.id})}">Delete</a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <form th:action="@{/admin/all}" method="post" th:object="${user}">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalLabeledit">Edit user</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <div class="form-group">
-                                                        <label for="recipient-id"
-                                                               class="col-form-label">ID:</label>
-                                                        <input type="text" class="form-control" id="recipient-id"
-                                                               name="id">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name"
-                                                               class="col-form-label">name:</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                               name="name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-lastName"
-                                                               class="col-form-label">lastName:</label>
-                                                        <input type="text" class="form-control" id="recipient-lastName"
-                                                               name="lastName">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-age"
-                                                               class="col-form-label">age:</label>
-                                                        <input type="text" class="form-control" id="recipient-age"
-                                                               name="age">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-email"
-                                                               class="col-form-label">email:</label>
-                                                        <input type="text" class="form-control" id="recipient-email"
-                                                               name="email">
-                                                    </div>
-                                                    <!--<div class="form-group">
-                                                        <label for="recipient-name"
-                                                               class="col-form-label">role:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>-->
-
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                                <!---------------------------------------------EDIT-------------------------------------------->
                         </div>
                         <div role="tabpanel" class="tab-pane" id="newUser">
                             <div class="table-responsive">
@@ -201,29 +202,30 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+
                                                 <div class="form-group">
-                                                    <label for="recipientName"
+                                                    <label for="recipientNameAdd"
                                                            class="col-form-label">name:</label>
-                                                    <input type="text" class="form-control" id="recipientName"
-                                                           name="name">
+                                                    <input type="text" class="form-control" id="recipientNameAdd"
+                                                           name="nameAdd">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="recipientLastName"
+                                                    <label for="recipientLastNameAdd"
                                                            class="col-form-label">lastName:</label>
-                                                    <input type="text" class="form-control" id="recipientLastName"
-                                                           name="lastName">
+                                                    <input type="text" class="form-control" id="recipientLastNameAdd"
+                                                           name="lastNameAdd">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="recipientAge"
+                                                    <label for="recipientAgeAdd"
                                                            class="col-form-label">age:</label>
-                                                    <input type="text" class="form-control" id="recipientAge"
-                                                           name="age">
+                                                    <input type="text" class="form-control" id="recipientAgeAdd"
+                                                           name="ageAdd">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="recipientEmail"
+                                                    <label for="recipientEmailAdd"
                                                            class="col-form-label">email:</label>
-                                                    <input type="text" class="form-control" id="recipientEmail"
-                                                           name="email">
+                                                    <input type="text" class="form-control" id="recipientEmailAdd"
+                                                           name="emailAdd">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -244,8 +246,8 @@
         </div>
     </div>
 </div>
-
-
+<!--<div th:insert="fragments/modal_edit_user :: editmodal"></div>-->
+<!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

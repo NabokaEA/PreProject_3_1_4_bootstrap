@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
+    public Iterable<User> findAllByOrderByIdAsc() {
+        return userRepository.findAllByOrderByIdAsc();
     }
 
     @Transactional
