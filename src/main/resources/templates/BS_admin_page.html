@@ -51,7 +51,7 @@
     <div class="row no-gutters">
         <div class="col-md-2">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item pt-2">
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item pt-2">
                     <a class="nav-link active" data-toggle="pill" href="#menu1">Admin</a>
                 </li>
                 <li class="nav-item pt-2">
@@ -61,7 +61,7 @@
         </div>
         <div class="col-md-10 pl-4 pt-2 mr-0 bg-light background-size=cover">
             <div class="tab-content">
-                <div id="menu1" class="tab-pane fade show active bg-light">
+                <div sec:authorize="hasRole('ADMIN')" id="menu1" class="tab-pane fade show active bg-light">
                     <h3>Admin panel</h3>
                     <div>
                         <ul class="nav nav-tabs">
