@@ -84,7 +84,9 @@
                                         <td th:text="${user.age}">Alex</td>
                                         <td th:text="${user.email}">Alex</td>
                                         <td>
-                                            <a th:each="role : ${user.getRoles()}" th:text="${role.getName()+' '}"/>
+                                            <span th:each="authority : ${#authentication.getAuthorities()}"
+                                                  th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                                                  th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}"></span>
                                         </td>
                                         <td>
                                             <button type="button"
