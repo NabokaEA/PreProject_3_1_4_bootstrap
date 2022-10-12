@@ -35,6 +35,12 @@ public class AdminController {
         UserDetailsImpl userDetailsImpl = (UserDetailsImpl) autentication.getPrincipal();
         User userss=userDetailsImpl.getUser();
         model.addAttribute("userss", userss);
+        HashSet<GrantedAuthority> hashSet = new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        String role = "";
+        for (GrantedAuthority gauth : hashSet) {
+            role = role + " " + gauth.getAuthority().substring(5);
+        }
+        model.addAttribute("roless", role);
 
         return "BS_admin_page";
     }
