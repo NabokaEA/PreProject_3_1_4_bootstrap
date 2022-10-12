@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokae.entity.User;
+import ru.nabokae.sequrity.UserDetailsImpl;
 import ru.nabokae.service.UserService;
 
 import java.sql.Array;
@@ -29,13 +30,11 @@ public class AdminController {
     @GetMapping("/all")
     public String ListPage(Model model) {
         logger.info("Запрошен список пользьзователей");
-        HashSet<GrantedAuthority> hashSet = new HashSet<GrantedAuthority>(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        String role = "";
-        for (GrantedAuthority gauth : hashSet) {
-            role = role + " " + gauth.getAuthority().substring(5);
-        }
         model.addAttribute("usersAll", userService.findAllByOrderByIdAsc());
-        model.addAttribute("authentication", role);
+        Authentication autentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) autentication.getPrincipal();
+        User userss=userDetailsImpl.getUser();
+        model.addAttribute("userss", userss);
 
         return "BS_admin_page";
     }

@@ -147,13 +147,6 @@
                                                                            name="email">
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close
-                                                                </button>
-                                                                <button type="submit" class="btn btn-primary">Save
-                                                                </button>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -252,44 +245,39 @@
                     </div>
                 </div>
                 <div id="menu2" class="tab-pane fade bg-light">
-                    <h3>User info </h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                        laudantium,
-                        totam rem aperiam.</p>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                        <td class="table-responsive">
+                            <br>
+                            <caption>
+                                <h4>
+                                    <p class="font-weight"> User info </p>
+                                </h4>
+                            </caption>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">LastName</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row" th:text="${userss.id}">1</th>
+                                    <td th:text="${userss.name}">Alex</td>
+                                    <td th:text="${userss.lastName}">Alex</td>
+                                    <td th:text="${userss.age}">Alex</td>
+                                    <td th:text="${userss.email}">Alex</td>
+                                    <td>
+                                            <span th:each="authority : ${#authentication.getAuthorities()}"
+                                                  th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                                                  th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                 </div>
             </div>
         </div>

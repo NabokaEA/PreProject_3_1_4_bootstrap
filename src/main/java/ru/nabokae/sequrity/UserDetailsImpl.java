@@ -1,16 +1,12 @@
 package ru.nabokae.sequrity;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import ru.nabokae.entity.Role;
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.nabokae.entity.User;
-
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
-public class UserDetailsImpl implements org.springframework.security.core.userdetails.UserDetails {
+
+public class UserDetailsImpl implements UserDetails {
 
     private final User user;
     public UserDetailsImpl(User user) {
