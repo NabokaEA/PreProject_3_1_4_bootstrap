@@ -124,7 +124,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="recipient-name"
-                                                                           class="col-form-label">name:</label>
+                                                                           class="col-form-label">Name:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
                                                                            th:value="${user.name}"
@@ -133,7 +133,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="recipient-lastName"
-                                                                           class="col-form-label">lastName:</label>
+                                                                           class="col-form-label">Lastname:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
                                                                            th:value="${user.lastName}"
@@ -142,7 +142,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="recipient-age"
-                                                                           class="col-form-label">age:</label>
+                                                                           class="col-form-label">Age:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
                                                                            th:value="${user.age}"
@@ -151,12 +151,30 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="recipient-email"
-                                                                           class="col-form-label">email:</label>
+                                                                           class="col-form-label">E-mail:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
                                                                            th:value="${user.email}"
                                                                            id="recipient-email"
                                                                            name="email">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-password"
+                                                                           class="col-form-label">Password:</label>
+                                                                    <input th:type="text"
+                                                                           class="form-control"
+                                                                           th:value="${user.password}"
+                                                                           id="recipient-password"
+                                                                           name="password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-roles"
+                                                                           class="col-form-label">Roles:</label>
+                                                                    <input th:type="text"
+                                                                           class="form-control"
+                                                                           th:value="${user.roles}"
+                                                                           id="recipient-roles"
+                                                                           name="password">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
