@@ -168,13 +168,17 @@
                                                                            name="password">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="recipient-roles"
+                                                                    <select class="form-control" id="dropDownList">
+                                                                        <option value="0">select option</option>
+                                                                        <option th:each="role : ${AllRoles}" th:value="${user.roles}" th:text="${role}"></option>
+                                                                    </select>
+                                                                    <!--<label for="recipient-roles"
                                                                            class="col-form-label">Roles:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
                                                                            th:value="${user.roles}"
                                                                            id="recipient-roles"
-                                                                           name="password">
+                                                                           name="roles">-->
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"

@@ -5,15 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.nabokae.entity.Role;
 import ru.nabokae.entity.User;
 import ru.nabokae.sequrity.UserDetailsImpl;
+import ru.nabokae.service.RoleService;
 import ru.nabokae.service.UserService;
 
-import java.sql.Array;
 import java.util.*;
 
 
@@ -22,9 +22,12 @@ import java.util.*;
 public class AdminController {
     public static final Logger logger = LoggerFactory.getLogger(AdminController.class);
     private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminController(UserService userService) {
+
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/all")
@@ -40,7 +43,9 @@ public class AdminController {
         for (GrantedAuthority gauth : hashSet) {
             role = role + " " + gauth.getAuthority().substring(5);
         }
-        model.addAttribute("roless", role);
+        List<Role> roleHashSet = roleService.findAll();
+        model.addAttribute("PrincipalRoles", role);
+        model.addAttribute("AllRoles", roleHashSet);
 
         return "BS_admin_page";
     }
