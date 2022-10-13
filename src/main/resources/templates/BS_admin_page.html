@@ -100,7 +100,7 @@
                                                  th:attr="id='editModal'+ ${user.id}"
                                                  tabindex="-1"
                                                  role="dialog">
-                                                <form th:action="@{/admin/all}" method="post">
+                                                <form th:action="@{/admin/all}" method="post" th:object="${user}">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -118,7 +118,7 @@
                                                                            class="col-form-label">ID:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.id}"
+                                                                           th:value="*{id}"
                                                                            id="recipient-id"
                                                                            name="id">
                                                                 </div>
@@ -127,7 +127,7 @@
                                                                            class="col-form-label">Name:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.name}"
+                                                                           th:value="*{name}"
                                                                            id="recipient-name"
                                                                            name="name">
                                                                 </div>
@@ -136,7 +136,7 @@
                                                                            class="col-form-label">Lastname:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.lastName}"
+                                                                           th:value="*{lastName}"
                                                                            id="recipient-lastName"
                                                                            name="lastName">
                                                                 </div>
@@ -145,7 +145,7 @@
                                                                            class="col-form-label">Age:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.age}"
+                                                                           th:value="*{age}"
                                                                            id="recipient-age"
                                                                            name="age">
                                                                 </div>
@@ -154,7 +154,7 @@
                                                                            class="col-form-label">E-mail:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.email}"
+                                                                           th:value="*{email}"
                                                                            id="recipient-email"
                                                                            name="email">
                                                                 </div>
@@ -163,22 +163,16 @@
                                                                            class="col-form-label">Password:</label>
                                                                     <input th:type="text"
                                                                            class="form-control"
-                                                                           th:value="${user.password}"
+                                                                           th:value="*{password}"
                                                                            id="recipient-password"
                                                                            name="password">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select class="form-control" id="dropDownList">
-                                                                        <option value="0">select option</option>
-                                                                        <option th:each="role : ${AllRoles}" th:value="${user.roles}" th:text="${role}"></option>
+                                                                    <label for="recipient-role"
+                                                                           class="col-form-label">Role:</label>
+                                                                    <select class="form-control" th:field="*{roles}"  id="recipient-role"  name="roles">
+                                                                        <option th:each="role : ${AllRoles}" th:value="${role.id}" th:text="${role.name}"></option>
                                                                     </select>
-                                                                    <!--<label for="recipient-roles"
-                                                                           class="col-form-label">Roles:</label>
-                                                                    <input th:type="text"
-                                                                           class="form-control"
-                                                                           th:value="${user.roles}"
-                                                                           id="recipient-roles"
-                                                                           name="roles">-->
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
