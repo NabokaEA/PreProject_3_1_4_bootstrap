@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByName(String name);
     Optional<User> findById(Long id);
     List<User> findAllByOrderByIdAsc();
+
+    @Override
+    <S extends User> S save(S entity);
 }

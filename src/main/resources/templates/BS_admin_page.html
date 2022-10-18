@@ -277,46 +277,46 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="menu2" class="tab-pane fade show active bg-light">
-                <td class="table-responsive">
-                    <br>
-                    <caption>
-                        <h4>
-                            <p class="font-weight"> User information-page </p>
-                        </h4>
-                    </caption>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">LastName</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row" th:text="${userss.id}">1</th>
-                            <td th:text="${userss.name}">Alex</td>
-                            <td th:text="${userss.lastName}">Alex</td>
-                            <td th:text="${userss.age}">Alex</td>
-                            <td th:text="${userss.email}">Alex</td>
-                            <td>
+                <div id="menu2" class="tab-pane fade show active bg-light">
+                    <td class="table-responsive">
+                        <br>
+                        <caption>
+                            <h4>
+                                <p class="font-weight"> User information-page </p>
+                            </h4>
+                        </caption>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">LastName</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" th:text="${userss.id}">1</th>
+                                <td th:text="${userss.name}">Alex</td>
+                                <td th:text="${userss.lastName}">Alex</td>
+                                <td th:text="${userss.age}">Alex</td>
+                                <td th:text="${userss.email}">Alex</td>
+                                <td>
                                             <span th:each="authority : ${#authentication.getAuthorities()}"
                                                   th:if="${authority.getAuthority().startsWith('ROLE_')}"
                                                   th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}"></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 <!--<div th:insert="fragments/modal_edit_user :: editmodal"></div>-->
 <!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
 <!-- Optional JavaScript -->
