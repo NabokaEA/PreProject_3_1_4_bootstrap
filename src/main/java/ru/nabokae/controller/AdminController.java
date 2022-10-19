@@ -58,12 +58,14 @@ public class AdminController {
         model.addAttribute("usersAll", userService.findAllByOrderByIdAsc());
         return "BS_admin_page";
     }
-    @ResponseBody
-    @GetMapping("/new")
-    public String NewUserForm(Model model) {
+
+    @PostMapping("/new")
+    public String NewUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         logger.info("Запрошена страница создания нового пользователя");
-        model.addAttribute("user", new User());
-        return "user";
+        User newUser = new User();
+        newUser = user;
+        userService.save(user);
+        return "redirect:/admin/all";
     }
 
     @PostMapping("/all")
