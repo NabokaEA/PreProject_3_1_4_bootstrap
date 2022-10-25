@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class myRestController {
     private final UserServiceImpl userService;
 
@@ -40,7 +40,7 @@ public class myRestController {
         return user.orElseThrow(UserNotFoundException::new);
     }
 
-    @PostMapping("/user/{id}")
+    @PostMapping("/user")
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
