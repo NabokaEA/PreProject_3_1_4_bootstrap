@@ -22,7 +22,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("ru.nabokae")
-@EnableJpaRepositories(basePackages = {"ru.nabokae.DAO"})
+@EnableJpaRepositories(basePackages = {"ru.nabokae.repository"})
 @PropertySource("classpath:application.properties")
 public class PersistenceJPAConfig {
 

@@ -6,14 +6,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nabokae.DAO.RoleRepository;
-import ru.nabokae.DAO.UserRepository;
-import ru.nabokae.entity.Role;
+import ru.nabokae.repository.RoleRepository;
+import ru.nabokae.repository.UserRepository;
 import ru.nabokae.entity.User;
 import ru.nabokae.sequrity.UserDetailsImpl;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
 import java.util.Optional;
 
 @Service

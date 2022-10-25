@@ -2,8 +2,8 @@ package ru.nabokae.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nabokae.DAO.RoleRepository;
-import ru.nabokae.DAO.UserRepository;
+import ru.nabokae.repository.RoleRepository;
+import ru.nabokae.repository.UserRepository;
 import ru.nabokae.entity.Role;
 
 import javax.persistence.EntityManager;
