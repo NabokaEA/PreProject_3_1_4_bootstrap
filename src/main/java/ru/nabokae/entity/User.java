@@ -3,8 +3,11 @@ package ru.nabokae.entity;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -15,20 +18,26 @@ public class User {
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
+    @NotEmpty(message = "Name should not be empty")
+    @Size (min=2, max=30, message = "Name should be between 2 and 30 characters")
 //    @NotEmpty(message = "Поле не должно быть пустым")
     private String name;
 
     @Column(name = "lastname")
+    @NotEmpty(message = "LastName should not be empty")
     private String lastName;
 //    @NotEmpty(message = "Поле не должно быть пустым")
     @Column(name = "password")
+    @NotEmpty(message = "Password should not be empty")
     private String password;
 
 //    @Email
     @Column(name="email")
+    @NotEmpty(message = "Email should not be empty")
     private String email;
     
     @Column(name="age")
+    @Min(value = 0, message = "Age should be greate than 0")
     private int age;
     @Fetch(FetchMode.JOIN)
     @ManyToMany(fetch = FetchType.LAZY)
