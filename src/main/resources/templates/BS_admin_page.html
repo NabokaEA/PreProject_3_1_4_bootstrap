@@ -256,17 +256,19 @@
                     console.log(data);
                     if (data.length > 0) {
                         var temp = "";
-                        data.forEach((u) => {
-                            console.log(u.id);
+                        for (let i = 0; i <= data.length-1; i++) {
+                            var roles = "";
                             temp += "<tr>";
-                            temp += "<td>" + u.id + "</td>";
-                            temp += "<td>" + u.name + "</td>";
-                            temp += "<td>" + u.lastName + "</td>";
-                            temp += "<td>" + u.age + "</td>";
-                            temp += "<td>" + u.email + "</td>";
-                            temp += "<td>" + u.roles + "</td></tr>";
-
-                        })
+                            temp += "<td>" + data[i].id + "</td>";
+                            temp += "<td>" + data[i].name + "</td>";
+                            temp += "<td>" + data[i].lastName + "</td>";
+                            temp += "<td>" + data[i].age + "</td>";
+                            temp += "<td>" + data[i].email + "</td>";
+                            for (let j = 0; j <= data[i].roles.length-1; j++) {
+                                roles += data[i].roles[j].name + " ";
+                            }
+                            temp += "<td>"+roles+"</td></tr>";
+                        }
                         document.getElementById('allUsersTableBody').innerHTML = temp;
                     }
                 }
