@@ -243,11 +243,6 @@
         </div>
     </div>
 </div>
-
-<!--<div th:insert="fragments/modal_edit_user :: editmodal"></div>-->
-<!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -257,62 +252,78 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script>
-    const editModalShow =  $('#EditModal').modal({show: true});
-    const editModal =  document.getElementById('EditModal');
-    const formEditUser = document.getElementById('formEditUser');
-    const formEditUserID = document.getElementById('user-ID');
-    const formEditUserName = document.getElementById('user-name');
-    const formEditUserLastName = document.getElementById('user-lastName');
-    const formEditUserAge = document.getElementById('user-Age');
-    const formEditUserEmail = document.getElementById('user-Email');
-    const formEditUserPass = document.getElementById('user-password');
-    const formEditUserRoles = document.getElementById('user-roles');
-
-
-
-    fetch("http://localhost:8187/api/users").then(
-        res => {
-            res.json().then(
-                data => {
-                    console.log(data);
-                    if (data.length > 0) {
-                        var temp = "";
-                        for (let i = 0; i <= data.length-1; i++) {
-                            var roles = "";
-                            temp += "<tr>";
-                            temp += "<td>" + data[i].id + "</td>";
-                            temp += "<td>" + data[i].name + "</td>";
-                            temp += "<td>" + data[i].lastName + "</td>";
-                            temp += "<td>" + data[i].age + "</td>";
-                            temp += "<td>" + data[i].email + "</td>";
-                            for (let j = 0; j <= data[i].roles.length-1; j++) {
-                                roles += data[i].roles[j].name + " ";
-                            }
-                            temp += "<td>" + roles + "</td>";
-                            temp += "<td> <button id='BtnEdit' type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#EditModal\" data-whatever=\"@mdo\">Edit</button></td>";
-                            temp += "<td> <a class=\"btn btn-danger text-white\" id=\"Delete\">Delete</a></td></tr>";
-                            //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
-
-
-                            console.log(temp);
-                        }
-                        document.getElementById('allUsersTableBody').innerHTML = temp;
-                    }
-                }
-            )
-        }
-    )
-
-
-</script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+<script type="text/javascript">
+    const RestApiUsers = 'http://localhost:8187/api/users'
+    const allUsersTableBody = document.getElementById('allUsersTableBody')
+    const modalEditShow = $("#EditModal").modal("show")
+    const formEditUser = document.getElementById('formEditUser')
+    const formEditUserID = document.getElementById('user-ID')
+    const formEditUserName = document.getElementById('user-name')
+    const formEditUserLastName = document.getElementById('user-lastName')
+    const formEditUserAge = document.getElementById('user-Age')
+    const formEditUserEmail = document.getElementById('user-Email')
+    const formEditUserPass = document.getElementById('user-password')
+    const formEditUserRoles = document.getElementById('user-roles')
+    let usersTabHTMLInjection = ''
+    let option = ''
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    const allUsersTab = (allUsers) =>{
+        console.log(allUsers);
+        if (allUsers.length > 0) {
+            for (let i = 0; i <= allUsers.length - 1; i++) {
+                var roles = "";
+                usersTabHTMLInjection += "<tr>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].id + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].name + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].lastName + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].age + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].email + "</td>";
+                for (let j = 0; j <= allUsers[i].roles.length - 1; j++) {
+                    roles += allUsers[i].roles[j].name + " ";
+                }
+                usersTabHTMLInjection += "<td>" + roles + "</td>";
+                usersTabHTMLInjection += "<td> <button id=\"Edit\" type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-whatever=\"@mdo\">Edit</button></td>";
+                usersTabHTMLInjection += "<td> <a class=\"btn btn-danger text-white\" id=\"Delete\">Delete</a></td></tr>";
+                //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
+
+
+                console.log(usersTabHTMLInjection);
+            }
+            allUsersTableBody.innerHTML = usersTabHTMLInjection;
+        }
+    }
+
+    fetch(RestApiUsers)
+                .then(response => response.json())
+                .then(data => allUsersTab(data))
+                .catch(error => console.log(error))
+
+
+
+
+    // formAllUsersBtnEdit.addEventListener('click',()=>{$("#EditModal").modal('show')});
+    const on = (element, event, selector, handler) => {
+        element.addEventListener(event, e => {
+            if (e.target.closest(selector)) {
+                handler(e)
+            }
+        })
+    }
+    on (document,'click','.Edit',e=>{
+        console.log('Edit')
+    })
+
+</script>
+
+
+
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white"  >
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -347,7 +358,7 @@
                     <div class="form-group">
                         <label for="user-roles"
                                class="col-form-label">Role:</label>
-                        <select class="form-control"  id="user-roles"  name="roles">
+                        <select class="form-control" id="user-roles" name="roles">
                             <option>1</option>
                             <option>2</option>
                         </select>
@@ -361,5 +372,10 @@
         </div>
     </div>
 </div>
+<!--<div th:insert="fragments/modal_edit_user :: editmodal"></div>-->
+<!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
 </body>
 </html>
