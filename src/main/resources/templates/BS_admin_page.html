@@ -258,6 +258,19 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script>
+    const editModalShow =  $('#EditModal').modal({show: true});
+    const editModal =  document.getElementById('EditModal');
+    const formEditUser = document.getElementById('formEditUser');
+    const formEditUserID = document.getElementById('user-ID');
+    const formEditUserName = document.getElementById('user-name');
+    const formEditUserLastName = document.getElementById('user-lastName');
+    const formEditUserAge = document.getElementById('user-Age');
+    const formEditUserEmail = document.getElementById('user-Email');
+    const formEditUserPass = document.getElementById('user-password');
+    const formEditUserRoles = document.getElementById('user-roles');
+
+
+
     fetch("http://localhost:8187/api/users").then(
         res => {
             res.json().then(
@@ -290,6 +303,8 @@
             )
         }
     )
+
+
 </script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
@@ -304,7 +319,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="formEditUser">
                     <div class="form-group">
                         <label for="user-ID" class="col-form-label">ID:</label>
                         <input type="number" class="form-control" id="user-ID">
@@ -328,6 +343,14 @@
                     <div class="form-group">
                         <label for="user-password" class="col-form-label">Password:</label>
                         <input type="password" class="form-control" id="user-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-roles"
+                               class="col-form-label">Role:</label>
+                        <select class="form-control"  id="user-roles"  name="roles">
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
