@@ -59,8 +59,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade show active" id="userTable">
+                    <div class="tab-content bg-light">
+                        <div role="tabpanel" class="tab-pane fade show active bg-light" id="userTable">
                             <td class="table-responsive">
                                 <br>
                                 <caption>
@@ -68,7 +68,7 @@
                                         <p class="font-weight"> Users list </p>
                                     </h4>
                                 </caption>
-                                <div class="container">
+                                <div class="container bg-light">
 
                                     <table id="TableAllUsers" class="table table-striped">
                                         <thead>
@@ -80,13 +80,34 @@
                                             <th scope="col">E-mail</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Edit</th>
-
                                             <th scope="col">Delete</th>
                                         </tr>
                                         </thead>
                                         <tbody id="allUsersTableBody">
                                         </tbody>
                                     </table>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+
                                 </div>
 
                                 <!---------------------------------------------EDIT-------------------------------------------->
@@ -256,7 +277,7 @@
                                 roles += data[i].roles[j].name + " ";
                             }
                             temp += "<td>" + roles + "</td>";
-                            temp += "<td> <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@mdo\">Edit</button></td>";
+                            temp += "<td> <button id='BtnEdit' type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#EditModal\" data-whatever=\"@mdo\">Edit</button></td>";
                             temp += "<td> <a class=\"btn btn-danger text-white\" id=\"Delete\">Delete</a></td></tr>";
                             //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
 
@@ -273,11 +294,11 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <div class="modal-header bg-primary text-white"  >
+                <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -285,18 +306,34 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="user-ID" class="col-form-label">ID:</label>
+                        <input type="number" class="form-control" id="user-ID">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <label for="user-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="user-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-lastName" class="col-form-label">Last name:</label>
+                        <input type="text" class="form-control" id="user-lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-Age" class="col-form-label">Age:</label>
+                        <input type="number" class="form-control" id="user-Age">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-Email" class="col-form-label">E-mail:</label>
+                        <input type="text" class="form-control" id="user-Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" id="user-password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
             </div>
         </div>
     </div>
