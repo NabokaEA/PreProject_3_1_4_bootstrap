@@ -9,7 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     <title>Hello, world!</title>
 </head>
 <body>
@@ -73,6 +74,7 @@
                                             <th scope="col">Age</th>
                                             <th scope="col">E-mail</th>
                                             <th scope="col">Role</th>
+                                            <th scope="col">Password</th>
                                             <th scope="col">Edit</th>
                                             <th scope="col">Delete</th>
                                         </tr>
@@ -295,6 +297,7 @@
 <!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -304,7 +307,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
     const RestApiUsers = 'http://localhost:8187/api/users'
     const allUsersTableBody = document.getElementById('allUsersTableBody')
@@ -335,6 +337,7 @@
                     roles += allUsers[i].roles[j].name + " ";
                 }
                 usersTabHTMLInjection += "<td>" + roles + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].password + "</td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
                 //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
@@ -362,14 +365,42 @@
             }
         })
     }
+    let idForm=0
     on (document,'click','.btnEdit',e=>{
         console.log('Edit')
+        const node = e.target.parentNode.parentNode
+        console.log(node)
+        id = node.children[0].innerHTML
+        const nameForm = node.children[1].innerHTML
+        const lastNameForm = node.children[2].innerHTML
+        const ageForm = node.children[3].innerHTML
+        const emailForm = node.children[4].innerHTML
+        const rolesForm = node.children[5].innerHTML
+        const passwordForm = node.children[4].innerHTML
+        name.value=nameForm
+        lastName.value=lastNameForm
+        age.value=ageForm
+        email.value=emailForm
+        roles.value=rolesForm
+        password.value=passwordForm
+        option = 'Edit'
+        $("#EditModal").modal("show")
+
     })
     on (document,'click','.btnDelete',e=>{
         const node = e.target.parentNode.parentNode
-        const id = node.firstElementChild.innerHTML
+        idForm = node.children[0].innerHTML
         console.log(node)
         console.log(id)
+        alertify.confirm("This is a confirm dialog.",
+            function(){
+                fetch(RestApiUsers+id,{method: 'DELETE'})
+                    .then(res => res.json())
+                    .then(() => location.reload())
+            },
+            function(){
+                alertify.error('Cancel');
+            });
     })
 
 </script>
