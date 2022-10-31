@@ -7,14 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Hello, world!</title>
 </head>
@@ -243,81 +237,6 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-<script type="text/javascript">
-    const RestApiUsers = 'http://localhost:8187/api/users'
-    const allUsersTableBody = document.getElementById('allUsersTableBody')
-    const modalEditShow = $("#EditModal").modal("show")
-    const formEditUser = document.getElementById('formEditUser')
-    const formEditUserID = document.getElementById('user-ID')
-    const formEditUserName = document.getElementById('user-name')
-    const formEditUserLastName = document.getElementById('user-lastName')
-    const formEditUserAge = document.getElementById('user-Age')
-    const formEditUserEmail = document.getElementById('user-Email')
-    const formEditUserPass = document.getElementById('user-password')
-    const formEditUserRoles = document.getElementById('user-roles')
-    let usersTabHTMLInjection = ''
-    let option = ''
-
-    const allUsersTab = (allUsers) =>{
-        console.log(allUsers);
-        if (allUsers.length > 0) {
-            for (let i = 0; i <= allUsers.length - 1; i++) {
-                var roles = "";
-                usersTabHTMLInjection += "<tr>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].id + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].name + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].lastName + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].age + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].email + "</td>";
-                for (let j = 0; j <= allUsers[i].roles.length - 1; j++) {
-                    roles += allUsers[i].roles[j].name + " ";
-                }
-                usersTabHTMLInjection += "<td>" + roles + "</td>";
-                usersTabHTMLInjection += "<td> <button id=\"Edit\" type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-whatever=\"@mdo\">Edit</button></td>";
-                usersTabHTMLInjection += "<td> <a class=\"btn btn-danger text-white\" id=\"Delete\">Delete</a></td></tr>";
-                //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
-
-
-                console.log(usersTabHTMLInjection);
-            }
-            allUsersTableBody.innerHTML = usersTabHTMLInjection;
-        }
-    }
-
-    fetch(RestApiUsers)
-                .then(response => response.json())
-                .then(data => allUsersTab(data))
-                .catch(error => console.log(error))
-
-
-
-
-    // formAllUsersBtnEdit.addEventListener('click',()=>{$("#EditModal").modal('show')});
-    const on = (element, event, selector, handler) => {
-        element.addEventListener(event, e => {
-            if (e.target.closest(selector)) {
-                handler(e)
-            }
-        })
-    }
-    on (document,'click','.Edit',e=>{
-        console.log('Edit')
-    })
-
-</script>
-
-
 
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -376,6 +295,83 @@
 <!--<div th:insert="fragments/modal_delete_user :: deletemodal"></div>-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+    const RestApiUsers = 'http://localhost:8187/api/users'
+    const allUsersTableBody = document.getElementById('allUsersTableBody')
+    //const modalEditShow = $("#EditModal").modal("show")
+    const formEditUser = document.getElementById('formEditUser')
+    const formEditUserID = document.getElementById('user-ID')
+    const formEditUserName = document.getElementById('user-name')
+    const formEditUserLastName = document.getElementById('user-lastName')
+    const formEditUserAge = document.getElementById('user-Age')
+    const formEditUserEmail = document.getElementById('user-Email')
+    const formEditUserPass = document.getElementById('user-password')
+    const formEditUserRoles = document.getElementById('user-roles')
+    let usersTabHTMLInjection = ''
+    let option = ''
 
+    const allUsersTab = (allUsers) =>{
+        console.log(allUsers);
+        if (allUsers.length > 0) {
+            for (let i = 0; i <= allUsers.length - 1; i++) {
+                var roles = "";
+                usersTabHTMLInjection += "<tr>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].id + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].name + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].lastName + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].age + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsers[i].email + "</td>";
+                for (let j = 0; j <= allUsers[i].roles.length - 1; j++) {
+                    roles += allUsers[i].roles[j].name + " ";
+                }
+                usersTabHTMLInjection += "<td>" + roles + "</td>";
+                usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
+                usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
+                //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
+
+
+                console.log(usersTabHTMLInjection);
+            }
+            allUsersTableBody.innerHTML = usersTabHTMLInjection;
+        }
+    }
+
+    fetch(RestApiUsers)
+        .then(response => response.json())
+        .then(data => allUsersTab(data))
+        .catch(error => console.log(error))
+
+
+
+
+    // formAllUsersBtnEdit.addEventListener('click',()=>{$("#EditModal").modal('show')});
+    const on = (element, event, selector, handler) => {
+        element.addEventListener(event, e => {
+            if (e.target.closest(selector)) {
+                handler(e)
+            }
+        })
+    }
+    on (document,'click','.btnEdit',e=>{
+        console.log('Edit')
+    })
+    on (document,'click','.btnDelete',e=>{
+        const node = e.target.parentNode.parentNode
+        const id = node.firstElementChild.innerHTML
+        console.log(node)
+        console.log(id)
+    })
+
+</script>
 </body>
 </html>
