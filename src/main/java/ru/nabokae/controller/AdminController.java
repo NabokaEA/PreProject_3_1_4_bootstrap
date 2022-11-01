@@ -49,14 +49,14 @@ public class AdminController {
         model.addAttribute("PrincipalRoles", role);
         model.addAttribute("AllRoles", roleList);
 
-        return "BS_admin_page";
+        return "BS5_admin";
     }
 
     @GetMapping("/")
     public String ListPageHome(Model model) {
         logger.info("Запрошен корневой адрес");
         model.addAttribute("usersAll", userService.findAllByOrderByIdAsc());
-        return "BS_admin_page";
+        return "BS5_admin";
     }
 
     @PostMapping("/new")
