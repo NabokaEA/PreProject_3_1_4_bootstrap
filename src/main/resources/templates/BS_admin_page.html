@@ -377,12 +377,13 @@
         const emailForm = node.children[4].innerHTML
         const rolesForm = node.children[5].innerHTML
         const passwordForm = node.children[4].innerHTML
-        name.value=nameForm
-        lastName.value=lastNameForm
-        age.value=ageForm
-        email.value=emailForm
-        roles.value=rolesForm
-        password.value=passwordForm
+        formEditUserID.value=id
+        formEditUserName.value=nameForm
+        formEditUserLastName.value=lastNameForm
+        formEditUserAge.value=ageForm
+        formEditUserEmail.value=emailForm
+        formEditUserPass.value=passwordForm
+        formEditUserRoles.value=rolesForm
         option = 'Edit'
         $("#EditModal").modal("show")
 
