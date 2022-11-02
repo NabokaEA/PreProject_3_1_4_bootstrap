@@ -255,7 +255,7 @@
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
         console.log(tableRecord)
-        console.log(id)
+        console.log(idForm)
         alertify.confirm("This is a confirm dialog.",
             function () {
                 fetch(RestApiUsers + id, {method: 'DELETE'})
