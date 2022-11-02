@@ -194,22 +194,22 @@
     /* Формирование HTML вставки с данными о пользователях, полученных от REST контроллера*/
 
 
-    const allUsersTab = (allUsers) => {
-        console.log(allUsers);
-        if (allUsers.length > 0) {
-            for (let i = 0; i <= allUsers.length - 1; i++) {
+    const allUsersTab = (allUsersFromRest) => {
+        console.log(allUsersFromRest);
+        if (allUsersFromRest.length > 0) {
+            for (let i = 0; i <= allUsersFromRest.length - 1; i++) {
                 var roles = "";
                 usersTabHTMLInjection += "<tr>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].id + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].name + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].lastName + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].age + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].email + "</td>";
-                for (let j = 0; j <= allUsers[i].roles.length - 1; j++) {
-                    roles += allUsers[i].roles[j].name + " ";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].id + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].name + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].lastName + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].age + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].email + "</td>";
+                for (let j = 0; j <= allUsersFromRest[i].roles.length - 1; j++) {
+                    roles += allUsersFromRest[i].roles[j].name + " ";
                 }
                 usersTabHTMLInjection += "<td>" + roles + "</td>";
-                usersTabHTMLInjection += "<td>" + allUsers[i].password + "</td>";
+                usersTabHTMLInjection += "<td>" + allUsersFromRest[i].password + "</td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
 
