@@ -47,7 +47,8 @@
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
              aria-labelledby="v-pills-profile-tab" tabindex="0">...
         </div>
-        <div sec:authorize="hasRole('ADMIN')" class="tab-pane fade  show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+        <div sec:authorize="hasRole('ADMIN')" class="tab-pane fade  show active" id="v-pills-settings" role="tabpanel"
+             aria-labelledby="v-pills-settings-tab"
              tabindex="0">
             <!-- Содержимое вкладки Admin верх -->
             <h3>Admin panel</h3>
@@ -97,7 +98,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Закрыть"></button>
                                 </div>
-                                <form>
+                                <form id="modalEditAdd">
                                     <div class="modal-body">
                                         <div class="form-group mb-3">
                                             <label for="user-ID" class="col-form-label">ID:</label>
@@ -164,7 +165,7 @@
     const usersTableBody = document.querySelector('tbody')
     let usersTabHTMLInjection = ''
     const modalUser = new bootstrap.Modal(document.getElementById('modalUser'))
-    const formEditUser = document.querySelector('form')
+    const formEditUser = document.getElementById('modalEditAdd')
     const formEditCreateUserID = document.getElementById('user-ID')
     const formEditCreateUserName = document.getElementById('user-name')
     const formEditCreateUserLastName = document.getElementById('user-lastName')
@@ -173,15 +174,17 @@
     const formEditCreateUserPass = document.getElementById('user-password')
     const formEditCreateUserRoles = document.getElementById('user-roles')
     let option = ''
-        //const allUsersTableBody = document.getElementById('allUsersTableBody')
-    btnCreate.addEventListener('click',()=>{
-        formEditCreateUserID.value=''
-        formEditCreateUserName.value=''
-        formEditCreateUserLastName.value=''
-        formEditCreateUserAge.value=''
-        formEditCreateUserEmail.value=''
-        formEditCreateUserPass.value=''
-        formEditCreateUserRoles.value=''
+
+    /* клик по кнопке add */
+    btnCreate.addEventListener('click', () => {
+        formEditCreateUserID.value = ''
+        formEditCreateUserName.value = ''
+        formEditCreateUserLastName.value = ''
+        formEditCreateUserAge.value = ''
+        formEditCreateUserEmail.value = ''
+        formEditCreateUserPass.value = ''
+        formEditCreateUserRoles.value = ''
+        option = 'Add'
         modalUser.show()
     })
 
@@ -193,7 +196,6 @@
 
     /* Формирование HTML вставки с данными о пользователях, полученных от REST контроллера*/
     const allUsersTab = (allUsersFromRest) => {
-        console.log(allUsersFromRest);
         if (allUsersFromRest.length > 0) {
             for (let i = 0; i <= allUsersFromRest.length - 1; i++) {
                 var roles = "";
@@ -210,7 +212,6 @@
                 usersTabHTMLInjection += "<td>" + allUsersFromRest[i].password + "</td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
-                console.log(usersTabHTMLInjection);
             }
             usersTableBody.innerHTML = usersTabHTMLInjection;
         }
@@ -250,15 +251,26 @@
         modalUser.show()
     })
 
+    formEditUser.addEventListener('submit', (e) => {
+        e.preventDefault()
+        console.log(option)
+        if (option == 'Add') {
+            console.log("Option Add")
+        }
+        if (option == 'Edit') {
+            console.log("Option Edit")
+        }
+        modalUser.hide()
+    })
+
+
     /* Обрабатываем клик по кнопке Delete */
     on(document, 'click', '.btnDelete', e => {
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
-        console.log(tableRecord)
-        console.log(idForm)
         alertify.confirm("This is a confirm dialog.",
             function () {
-                fetch('http://localhost:8187/api/users/'+idForm, {method: 'DELETE'})
+                fetch('http://localhost:8187/api/users/' + idForm, {method: 'DELETE'})
                     .then(res => res.json())
                     .then(() => location.reload())
             },
@@ -267,17 +279,7 @@
             });
     })
 
-    modalEdit.addEventListener('msave', (e) => {
-        e.preventDefault()
-        console.log("event")
-        if (option == 'Add') {
-            console.log("Option Add")
-        }
-        if (option == 'Edit') {
-            console.log("Option Edit")
-        }
-        $("#EditModal").modal("hide")
-    })
+
 </script>
 </body>
 </html>
