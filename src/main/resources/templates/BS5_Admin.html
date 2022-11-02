@@ -60,6 +60,8 @@
                     <button class="nav-link" id="nav-create-tab" data-bs-toggle="tab" data-bs-target="#nav-create"
                             type="button" role="tab" aria-controls="nav-create" aria-selected="false">Add new user
                     </button>
+                    <!--<button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal">Add new user
+                    </button>-->
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -85,10 +87,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- Модальное окно верх -->
-                    <button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal">Add new user
-                    </button>
 
+                    <!-- Модальное окно верх -->
                     <div class="modal fade" id="modalUser" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog">
@@ -147,7 +147,47 @@
                 </div>
                 <div class="tab-pane fade" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab"
                      tabindex="0">
-
+                    <form id="Add">
+                        <div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-ID" class="col-form-label">ID:</label>
+                                <input type="number" class="form-control" id="new-user-ID">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="new-user-name">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-lastName" class="col-form-label">Last name:</label>
+                                <input type="text" class="form-control" id="new-user-lastName">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-Age" class="col-form-label">Age:</label>
+                                <input type="number" class="form-control" id="new-user-Age">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-Email" class="col-form-label">E-mail:</label>
+                                <input type="text" class="form-control" id="new-user-Email">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-password" class="col-form-label">Password:</label>
+                                <input type="password" class="form-control" id="new-user-password">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="new-user-roles"
+                                       class="col-form-label">Role:</label>
+                                <select class="form-control" id="new-user-roles" name="roles">
+                                    <option>1</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- Содержимое вкладки Admin низ -->
@@ -175,7 +215,7 @@
     const formEditCreateUserRoles = document.getElementById('user-roles')
     let option = ''
 
-    /* клик по кнопке add */
+    /*/!* клик по кнопке add *!/
     btnCreate.addEventListener('click', () => {
         formEditCreateUserID.value = ''
         formEditCreateUserName.value = ''
@@ -186,7 +226,7 @@
         formEditCreateUserRoles.value = ''
         option = 'Add'
         modalUser.show()
-    })
+    })*/
 
     /*Обращение к REST контроллеру с запросом списка пользователей*/
     fetch(restApiUsers)
