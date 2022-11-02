@@ -212,18 +212,12 @@
                 usersTabHTMLInjection += "<td>" + allUsersFromRest[i].password + "</td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
-
-
                 console.log(usersTabHTMLInjection);
             }
-            allUsersTableBody.innerHTML = usersTabHTMLInjection;
+            usersTableBody.innerHTML = usersTabHTMLInjection;
         }
     }
 
-
-
-
-    // formAllUsersBtnEdit.addEventListener('click',()=>{$("#EditModal").modal('show')});
     const on = (element, event, selector, handler) => {
         element.addEventListener(event, e => {
             if (e.target.closest(selector)) {
@@ -251,7 +245,7 @@
         formEditCreateUserPass.value = passwordForm
         formEditCreateUserRoles.value = rolesForm
         option = 'Edit'
-        modalEdit.modal("show")
+        modalUser.show()
 
     })
     on(document, 'click', '.btnDelete', e => {
