@@ -258,7 +258,7 @@
         console.log(idForm)
         alertify.confirm("This is a confirm dialog.",
             function () {
-                fetch(RestApiUsers + id, {method: 'DELETE'})
+                fetch('http://localhost:8187/api/users/'+idForm, {method: 'DELETE'})
                     .then(res => res.json())
                     .then(() => location.reload())
             },
