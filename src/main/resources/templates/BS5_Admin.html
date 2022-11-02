@@ -85,8 +85,7 @@
                         </table>
                     </div>
                     <!-- Модальное окно верх -->
-                    <button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalUser">Add new user
+                    <button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal">Add new user
                     </button>
 
                     <div class="modal fade" id="modalUser" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -161,19 +160,39 @@
         crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
-    const RestApiUsers = 'http://localhost:8187/api/users'
-    const allUsersTableBody = document.getElementById('allUsersTableBody')
-    /*    const modalEdit = document.getElementById('EditModal')*/
-    const formEditUser = document.querySelector('form')
-    const formEditUserID = document.getElementById('user-ID')
-    const formEditUserName = document.getElementById('user-name')
-    const formEditUserLastName = document.getElementById('user-lastName')
-    const formEditUserAge = document.getElementById('user-Age')
-    const formEditUserEmail = document.getElementById('user-Email')
-    const formEditUserPass = document.getElementById('user-password')
-    const formEditUserRoles = document.getElementById('user-roles')
+    const restApiUsers = 'http://localhost:8187/api/users'
+    const usersTableBody = document.querySelector('tbody')
     let usersTabHTMLInjection = ''
+    const modalUser = new bootstrap.Modal(document.getElementById('modalUser'))
+    const formEditUser = document.querySelector('form')
+    const formEditCreateUserID = document.getElementById('user-ID')
+    const formEditCreateUserName = document.getElementById('user-name')
+    const formEditCreateUserLastName = document.getElementById('user-lastName')
+    const formEditCreateUserAge = document.getElementById('user-Age')
+    const formEditCreateUserEmail = document.getElementById('user-Email')
+    const formEditCreateUserPass = document.getElementById('user-password')
+    const formEditCreateUserRoles = document.getElementById('user-roles')
     let option = ''
+        //const allUsersTableBody = document.getElementById('allUsersTableBody')
+    btnCreate.addEventListener('click',()=>{
+        formEditCreateUserID.value=''
+        formEditCreateUserName.value=''
+        formEditCreateUserLastName.value=''
+        formEditCreateUserAge.value=''
+        formEditCreateUserEmail.value=''
+        formEditCreateUserPass.value=''
+        formEditCreateUserRoles.value=''
+        modalUser.show()
+    })
+
+    /*Обращение к REST контроллеру с запросом списка пользователей*/
+    fetch(restApiUsers)
+        .then(response => response.json())
+        .then(data => allUsersTab(data))
+        .catch(error => console.log(error))
+
+    /* Формирование HTML вставки с данными о пользователях, полученных от REST контроллера*/
+
 
     const allUsersTab = (allUsers) => {
         console.log(allUsers);
@@ -193,7 +212,6 @@
                 usersTabHTMLInjection += "<td>" + allUsers[i].password + "</td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\"btnEdit btn btn-primary\">Edit</a></td>";
                 usersTabHTMLInjection += "<td class=\'text-center\'><a class=\'btnDelete btn btn-danger\'>Delete</a></td></tr>";
-                //<td><button type="button" className="btn btn-info text-white" data-toggle="modal" data-target="#editModal" id="submit">Edit</button></td>
 
 
                 console.log(usersTabHTMLInjection);
@@ -202,10 +220,7 @@
         }
     }
 
-    fetch(RestApiUsers)
-        .then(response => response.json())
-        .then(data => allUsersTab(data))
-        .catch(error => console.log(error))
+
 
 
     // formAllUsersBtnEdit.addEventListener('click',()=>{$("#EditModal").modal('show')});
@@ -228,13 +243,13 @@
         const emailForm = node.children[4].innerHTML
         const rolesForm = node.children[5].innerHTML
         const passwordForm = node.children[6].innerHTML
-        formEditUserID.value = id
-        formEditUserName.value = nameForm
-        formEditUserLastName.value = lastNameForm
-        formEditUserAge.value = ageForm
-        formEditUserEmail.value = emailForm
-        formEditUserPass.value = passwordForm
-        formEditUserRoles.value = rolesForm
+        formEditCreateUserID.value = id
+        formEditCreateUserName.value = nameForm
+        formEditCreateUserLastName.value = lastNameForm
+        formEditCreateUserAge.value = ageForm
+        formEditCreateUserEmail.value = emailForm
+        formEditCreateUserPass.value = passwordForm
+        formEditCreateUserRoles.value = rolesForm
         option = 'Edit'
         modalEdit.modal("show")
 
