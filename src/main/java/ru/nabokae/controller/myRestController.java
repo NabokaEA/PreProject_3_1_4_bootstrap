@@ -62,8 +62,8 @@ public class myRestController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid User user, BindingResult bindingResult) {
-        logger.info("Запрошен метод EDIT REST");
+    public ResponseEntity<HttpStatus> create(@RequestBody User user, BindingResult bindingResult) {
+        logger.info("Запрошен метод ADD REST");
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -76,7 +76,9 @@ public class myRestController {
             }
             throw new UserNotCreatedException(errorMessage.toString());
         }
-        userService.save(user);
+        User newUser;
+        newUser = user;
+        userService.save(newUser);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

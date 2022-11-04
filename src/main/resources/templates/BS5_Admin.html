@@ -79,8 +79,6 @@
                     <button class="nav-link" id="nav-create-tab" data-bs-toggle="tab" data-bs-target="#nav-create"
                             type="button" role="tab" aria-controls="nav-create" aria-selected="false">Add new user
                     </button>
-                    <!--<button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal">Add new user
-                    </button>-->
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -164,14 +162,12 @@
                     <!-- Модальное окно низ -->
                     <!-- Содержимое вкладки All Users низ -->
                 </div>
+
+                <!-- Вкладка создания пользователя верх////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
                 <div class="tab-pane fade" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab"
                      tabindex="0">
-                    <form id="Add">
+                    <form id="AddUserForm">
                         <div>
-                            <div class="form-group mb-3">
-                                <label for="new-user-ID" class="col-form-label">ID:</label>
-                                <input type="number" class="form-control" id="new-user-ID">
-                            </div>
                             <div class="form-group mb-3">
                                 <label for="new-user-name" class="col-form-label">Name:</label>
                                 <input type="text" class="form-control" id="new-user-name">
@@ -202,9 +198,7 @@
                             </div>
                         </div>
                         <div class="footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                            </button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button id="addNewUser" type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
@@ -220,6 +214,7 @@
         crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
+    /*Облась объявлений констант и функций..............................................................................................*/
     const restApiAllUsers = 'http://localhost:8187/api/users'
     const restApiAuthUser = 'http://localhost:8187/api/user'
     const usersTableBody = document.getElementById('allUsersTableBodyId')
@@ -228,17 +223,38 @@
     let authUserTabHTMLInjection = ''
     const modalUser = new bootstrap.Modal(document.getElementById('modalUser'))
     const formEditUser = document.getElementById('modalEditAdd')
-    const formEditCreateUserID = document.getElementById('user-ID')
-    const formEditCreateUserName = document.getElementById('user-name')
-    const formEditCreateUserLastName = document.getElementById('user-lastName')
-    const formEditCreateUserAge = document.getElementById('user-Age')
-    const formEditCreateUserEmail = document.getElementById('user-Email')
-    const formEditCreateUserPass = document.getElementById('user-password')
-    const formEditCreateUserRoles = document.getElementById('user-roles')
+    const formAddUser = document.getElementById('AddUserForm')
+    const formEditUserID = document.getElementById('user-ID')
+    const formEditUserName = document.getElementById('user-name')
+    const formEditUserLastName = document.getElementById('user-lastName')
+    const formEditUserAge = document.getElementById('user-Age')
+    const formEditUserEmail = document.getElementById('user-Email')
+    const formEditUserPass = document.getElementById('user-password')
+    const formEditUserRoles = document.getElementById('user-roles')
+
+    const formCreateUserID = document.getElementById('user-ID')
+    const formCreateUserName = document.getElementById('user-name')
+    const formCreateUserLastName = document.getElementById('user-lastName')
+    const formCreateUserAge = document.getElementById('user-Age')
+    const formCreateUserEmail = document.getElementById('user-Email')
+    const formCreateUserPass = document.getElementById('user-password')
+    const formCreateUserRoles = document.getElementById('user-roles')
     let option = ''
 
-    /*TableUser, UserTableBody*/
+    /* Util closest -Для каждого элемента в наборе получить первый элемент,
+ соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
+    const on = (element, event, selector, handler) => {
+        element.addEventListener(event, e => {
+            if (e.target.closest(selector)) {
+                handler(e)
+            }
+        })
+    }
+    /*........................................Конец Обласи объявлений констант и функций..............................................................................................*/
 
+
+
+    /*.................................Формирование вкладки с списком пользователей..................................................................................*/
     /*Обращение к REST контроллеру с запросом списка пользователей*/
     fetch(restApiAllUsers)
         .then(response => response.json())
@@ -267,17 +283,6 @@
         }
     }
 
-
-    /* closest -Для каждого элемента в наборе получить первый элемент,
-     соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
-    const on = (element, event, selector, handler) => {
-        element.addEventListener(event, e => {
-            if (e.target.closest(selector)) {
-                handler(e)
-            }
-        })
-    }
-
     /* Обрабатываем клик по кнопке Edit */
     let idForm = 0
     on(document, 'click', '.btnEdit', e => {
@@ -291,27 +296,24 @@
         const emailForm = tableRecord.children[4].innerHTML
         const rolesForm = tableRecord.children[5].innerHTML
         const passwordForm = tableRecord.children[6].innerHTML
-        formEditCreateUserID.value = id
-        formEditCreateUserName.value = nameForm
-        formEditCreateUserLastName.value = lastNameForm
-        formEditCreateUserAge.value = ageForm
-        formEditCreateUserEmail.value = emailForm
-        formEditCreateUserPass.value = passwordForm
-        formEditCreateUserRoles.value = rolesForm
+        formEditUserID.value = id
+        formEditUserName.value = nameForm
+        formEditUserLastName.value = lastNameForm
+        formEditUserAge.value = ageForm
+        formEditUserEmail.value = emailForm
+        formEditUserPass.value = passwordForm
+        formEditUserRoles.value = rolesForm
         option = 'Edit'
         modalUser.show()
     })
 
+    /* Обрабатываем клик по кнопке EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT... */
     formEditUser.addEventListener('submit', (e) => {
         e.preventDefault()
         console.log(option)
-        if (option == 'Add') {
-            console.log("Option Add")
-        }
-        if (option == 'Edit') {
             console.log("Option Edit")
             const tableRecord = e.target.parentNode.parentNode
-            idForm = formEditCreateUserID.value
+            idForm = formEditUserID.value
             console.log(idForm)
             fetch('http://localhost:8187/api/user/' + idForm, {
                 method: 'POST',
@@ -319,31 +321,21 @@
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    /*               "id":1,
-                                   "name":"Admin",
-                                   "lastName":"Admin",
-                                   "password":"Admin",
-                                   "email":"1@1.ru",
-                                   "age":18,
-                                   "roles":[{"id":1,"name":"ROLE_ADMIN","authority":"ROLE_ADMIN"},{"id":2,"name":"ROLE_USER","authority":"ROLE_USER"}]*/
-                    id: formEditCreateUserID.value,
-                    name: formEditCreateUserName.value,
-                    lastName: formEditCreateUserLastName.value,
-                    password: formEditCreateUserPass.value,
-                    email: formEditCreateUserEmail.value,
-                    age: formEditCreateUserAge.value,
+                    id: formEditUserID.value,
+                    name: formEditUserName.value,
+                    lastName: formEditUserLastName.value,
+                    password: formEditUserPass.value,
+                    email: formEditUserEmail.value,
+                    age: formEditUserAge.value,
                     roles: [{name:"ROLE_ADMIN"}]
                 })
             })
                 .then(res => res.json())
                 .then(() => location.reload())
-        }
     modalUser.hide()
     })
 
-
-
-    /* Обрабатываем клик по кнопке Delete */
+    /* Обрабатываем клик по кнопке DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE */
     on(document, 'click', '.btnDelete', e => {
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
@@ -358,6 +350,40 @@
             });
     })
 
+    /*.................................Конец блока формирования вкладки с списком пользователей..................................................................................*/
+
+
+    /*.................................Формирование вкладки добавления пользователя.........ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...........*/
+    /* Обрабатываем клик по кнопке Add */
+    formAddUser.addEventListener('submit', (e) => {
+        e.preventDefault()
+        console.log("Add User Event")
+        fetch('http://localhost:8187/api/user/', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: formCreateUserName.value,
+                lastName: formCreateUserLastName.value,
+                password: formCreateUserPass.value,
+                email: formCreateUserEmail.value,
+                age: formCreateUserAge.value,
+                roles: [{
+                    id:2,
+                    name:"ROLE_ADMIN",
+                    authority:"ROLE_USER"
+                }]
+            })
+        })
+            .then(res => res.json())
+            .then(() => location.reload())
+    })
+    /*.................................конц блока формирование вкладки добавления пользователя..............................................................................................*/
+
+
+
+    /*.................................Формирование вкладки информации об авторизованном пользователе.......................................................................................*/
     /*Обращение к REST контроллеру с запросом данных авторизованного пользователя*/
     fetch(restApiAuthUser)
         .then(response => response.json())
@@ -382,7 +408,7 @@
         authUserTabHTMLInjection += "<td>" + authUserFromRest.password + "</td>"
         authUserTableBody.innerHTML = authUserTabHTMLInjection;
     }
-
+    /*.................................Конец блока формированиявкладки информации об авторизованном пользователе...........................................................................*/
 
 </script>
 </body>
