@@ -29,25 +29,25 @@
     </div>
 </nav>
 <!-- Навигационная панель низ -->
-<!-- Плагин вкладок  с вертикальными таблетками верх-->
+<!-- Плагин вкладок  с вертикальными таблетками верх sec:authorize="hasRole('ADMIN')" -->
 <div class="d-flex align-items-start">
     <div class="col-md-2">
         <div class="nav flex-column nav-pills me-3 mt-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button sec:authorize="hasRole('ADMIN')" class="nav-link active mt-2" id="v-pills-settings-tab"
+            <button sec:authorize="hasRole('ADMIN')" class="nav-link  mt-2" id="v-pills-settings-tab"
                     data-bs-toggle="pill" data-bs-target="#v-pills-settings"
-                    type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Admin
+                    type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">Admin
             </button>
-            <button class="nav-link pt-2" id="v-pills-profile-tab" data-bs-toggle="pill"
+            <button class="nav-link active pt-2" id="v-pills-profile-tab" data-bs-toggle="pill"
                     data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
                     aria-selected="true">User
             </button>
         </div>
     </div>
     <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+        <div class="tab-pane fade  show active" id="v-pills-profile" role="tabpanel"
              aria-labelledby="v-pills-profile-tab" tabindex="0">
             <h3>User info</h3>
-            <!-- Содержимое вкладки User info верх -->
+            <!-- Содержимое вкладки User info верх....User info...User info...User info...User info...User info...User info...User info........................... -->
             <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
                 <table id="TableUser" class="table table-striped">
                     <thead>
@@ -66,7 +66,7 @@
                 </table>
             </div>
         </div>
-        <div sec:authorize="hasRole('ADMIN')" class="tab-pane fade  show active" id="v-pills-settings" role="tabpanel"
+        <div sec:authorize="hasRole('ADMIN')" class="tab-pane fade" id="v-pills-settings" role="tabpanel"
              aria-labelledby="v-pills-settings-tab"
              tabindex="0">
             <!-- Содержимое вкладки Admin верх -->
@@ -224,6 +224,9 @@
     const modalUser = new bootstrap.Modal(document.getElementById('modalUser'))
     const formEditUser = document.getElementById('modalEditAdd')
     const formAddUser = document.getElementById('AddUserForm')
+    const tabUserInfo = document.getElementById('v-pills-tab')
+    const tabEl = tabUserInfo.querySelector('button[data-bs-toggle="pill"]')
+    const btnUserInfo = document.getElementById('v-pills-profile-tab')
     const formEditUserID = document.getElementById('user-ID')
     const formEditUserName = document.getElementById('user-name')
     const formEditUserLastName = document.getElementById('user-lastName')
@@ -311,27 +314,27 @@
     formEditUser.addEventListener('submit', (e) => {
         e.preventDefault()
         console.log(option)
-            console.log("Option Edit")
-            idForm = formEditUserID.value
-            console.log(idForm)
-            fetch('http://localhost:8187/api/user/' + idForm, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: formEditUserID.value,
-                    name: formEditUserName.value,
-                    lastName: formEditUserLastName.value,
-                    password: formEditUserPass.value,
-                    email: formEditUserEmail.value,
-                    age: formEditUserAge.value,
-                    roles: [{name:"ROLE_ADMIN"}]
-                })
+        console.log("Option Edit")
+        idForm = formEditUserID.value
+        console.log(idForm)
+        fetch('http://localhost:8187/api/user/' + idForm, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: formEditUserID.value,
+                name: formEditUserName.value,
+                lastName: formEditUserLastName.value,
+                password: formEditUserPass.value,
+                email: formEditUserEmail.value,
+                age: formEditUserAge.value,
+                roles: [{name: "ROLE_ADMIN"}]
             })
-                .then(res => res.json())
-                .then(() => location.reload())
-    modalUser.hide()
+        })
+            .then(res => res.json())
+            .then(() => location.reload())
+        modalUser.hide()
     })
 
     /* Обрабатываем клик по кнопке DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE...DELTE */
@@ -339,8 +342,8 @@
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
         fetch('http://localhost:8187/api/users/' + idForm, {method: 'DELETE'})
-                .then(res => res.json())
-                .then(() => location.reload())
+            .then(res => res.json())
+            .then(() => location.reload())
     })
 
     /*.................................Конец блока формирования вкладки с списком пользователей..................................................................................*/
@@ -367,7 +370,7 @@
                 password: formCreateUserPass.value,
                 email: formCreateUserEmail.value,
                 age: formCreateUserAge.value,
-                roles: [{name:"ROLE_ADMIN"}]
+                roles: [{name: "ROLE_ADMIN"}]
             })
         })
             .then(res => res.json())
@@ -378,31 +381,36 @@
 
 
 
-    /*.................................Формирование вкладки информации об авторизованном пользователе.......................................................................................*/
-    /*Обращение к REST контроллеру с запросом данных авторизованного пользователя*/
-    fetch(restApiAuthUser)
-        .then(response => response.json())
-        .then(data => authUserTable(data))
-        .catch(error => console.log(error))
+    /*.................................Формирование вкладки информации об авторизованном пользователе..USER_INFO...USER_INFO...USER_INFO...USER_INFO...USER_INFO...USER_INFO...USER_INFO...*/
+    //btnUserInfo.addEventListener('hidden.bs.tab', event => {
+    function funonload() {
+        /*Обращение к REST контроллеру с запросом данных авторизованного пользователя*/
+        fetch(restApiAuthUser)
+            .then(response => response.json())
+            .then(data => authUserTable(data))
+            .catch(error => console.log(error))
 
-    /* Формирование HTML вставки с данными об автооризованном пользователе, полученных от REST контроллера*/
-    const authUserTable = (authUserFromRest) => {
-        console.log(authUserFromRest)
-        console.log(authUserFromRest.id)
-        var roles = ""
-        authUserTabHTMLInjection += "<tr>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.id + "</td>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.name + "</td>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.lastName + "</td>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.age + "</td>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.email + "</td>"
-        for (let j = 0; j <= authUserFromRest.roles.length - 1; j++) {
-            roles += authUserFromRest.roles[j].name + " "
+        /* Формирование HTML вставки с данными об автооризованном пользователе, полученными от REST контроллера*/
+        const authUserTable = (authUserFromRest) => {
+            console.log(authUserFromRest)
+            console.log(authUserFromRest.id)
+            var roles = ""
+            authUserTabHTMLInjection += "<tr>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.id + "</td>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.name + "</td>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.lastName + "</td>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.age + "</td>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.email + "</td>"
+            for (let j = 0; j <= authUserFromRest.roles.length - 1; j++) {
+                roles += authUserFromRest.roles[j].name + " "
+            }
+            authUserTabHTMLInjection += "<td>" + roles + "</td>"
+            authUserTabHTMLInjection += "<td>" + authUserFromRest.password + "</td>"
+            authUserTableBody.innerHTML = authUserTabHTMLInjection;
         }
-        authUserTabHTMLInjection += "<td>" + roles + "</td>"
-        authUserTabHTMLInjection += "<td>" + authUserFromRest.password + "</td>"
-        authUserTableBody.innerHTML = authUserTabHTMLInjection;
     }
+    window.onload = funonload;
+
     /*.................................Конец блока формированиявкладки информации об авторизованном пользователе...........................................................................*/
 
 </script>
