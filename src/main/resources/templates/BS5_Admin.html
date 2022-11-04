@@ -338,15 +338,9 @@
     on(document, 'click', '.btnDelete', e => {
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
-        alertify.confirm("Arw you sure?",
-            function () {
-                fetch('http://localhost:8187/api/users/' + idForm, {method: 'DELETE'})
-                    .then(res => res.json())
-                    .then(() => location.reload())
-            },
-            function () {
-                alertify.error('Cancel');
-            });
+        fetch('http://localhost:8187/api/users/' + idForm, {method: 'DELETE'})
+                .then(res => res.json())
+                .then(() => location.reload())
     })
 
     /*.................................Конец блока формирования вкладки с списком пользователей..................................................................................*/
