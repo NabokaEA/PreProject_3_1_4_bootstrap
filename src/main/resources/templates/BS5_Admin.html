@@ -232,13 +232,13 @@
     const formEditUserPass = document.getElementById('user-password')
     const formEditUserRoles = document.getElementById('user-roles')
 
-    const formCreateUserID = document.getElementById('user-ID')
-    const formCreateUserName = document.getElementById('user-name')
-    const formCreateUserLastName = document.getElementById('user-lastName')
-    const formCreateUserAge = document.getElementById('user-Age')
-    const formCreateUserEmail = document.getElementById('user-Email')
-    const formCreateUserPass = document.getElementById('user-password')
-    const formCreateUserRoles = document.getElementById('user-roles')
+    const formCreateUserID = document.getElementById('new-user-ID')
+    const formCreateUserName = document.getElementById('new-user-name')
+    const formCreateUserLastName = document.getElementById('new-user-lastName')
+    const formCreateUserAge = document.getElementById('new-user-Age')
+    const formCreateUserEmail = document.getElementById('new-user-Email')
+    const formCreateUserPass = document.getElementById('new-user-password')
+    const formCreateUserRoles = document.getElementById('new-user-roles')
     let option = ''
 
     /* Util closest -Для каждого элемента в наборе получить первый элемент,
@@ -312,7 +312,6 @@
         e.preventDefault()
         console.log(option)
             console.log("Option Edit")
-            const tableRecord = e.target.parentNode.parentNode
             idForm = formEditUserID.value
             console.log(idForm)
             fetch('http://localhost:8187/api/user/' + idForm, {
@@ -339,7 +338,7 @@
     on(document, 'click', '.btnDelete', e => {
         const tableRecord = e.target.parentNode.parentNode
         idForm = tableRecord.children[0].innerHTML
-        alertify.confirm("This is a confirm dialog.",
+        alertify.confirm("Arw you sure?",
             function () {
                 fetch('http://localhost:8187/api/users/' + idForm, {method: 'DELETE'})
                     .then(res => res.json())
@@ -358,7 +357,12 @@
     formAddUser.addEventListener('submit', (e) => {
         e.preventDefault()
         console.log("Add User Event")
-        fetch('http://localhost:8187/api/user/', {
+        console.log(formCreateUserName.value)
+        console.log(formCreateUserLastName.value)
+        console.log(formCreateUserPass.value)
+        console.log(formCreateUserAge.value)
+
+        fetch('http://localhost:8187/api/user', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -369,16 +373,13 @@
                 password: formCreateUserPass.value,
                 email: formCreateUserEmail.value,
                 age: formCreateUserAge.value,
-                roles: [{
-                    id:2,
-                    name:"ROLE_ADMIN",
-                    authority:"ROLE_USER"
-                }]
+                roles: [{name:"ROLE_ADMIN"}]
             })
         })
             .then(res => res.json())
             .then(() => location.reload())
     })
+
     /*.................................конц блока формирование вкладки добавления пользователя..............................................................................................*/
 
 
