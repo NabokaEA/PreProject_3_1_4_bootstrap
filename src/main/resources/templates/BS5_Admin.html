@@ -268,7 +268,6 @@
     }
 
 
-
     /* closest -Для каждого элемента в наборе получить первый элемент,
      соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
     const on = (element, event, selector, handler) => {
@@ -311,9 +310,37 @@
         }
         if (option == 'Edit') {
             console.log("Option Edit")
+            const tableRecord = e.target.parentNode.parentNode
+            idForm = formEditCreateUserID.value
+            console.log(idForm)
+            fetch('http://localhost:8187/api/user/' + idForm, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    /*               "id":1,
+                                   "name":"Admin",
+                                   "lastName":"Admin",
+                                   "password":"Admin",
+                                   "email":"1@1.ru",
+                                   "age":18,
+                                   "roles":[{"id":1,"name":"ROLE_ADMIN","authority":"ROLE_ADMIN"},{"id":2,"name":"ROLE_USER","authority":"ROLE_USER"}]*/
+                    id: formEditCreateUserID.value,
+                    name: formEditCreateUserName.value,
+                    lastName: formEditCreateUserLastName.value,
+                    password: formEditCreateUserPass.value,
+                    email: formEditCreateUserEmail.value,
+                    age: formEditCreateUserAge.value,
+                    roles: [{name:"ROLE_ADMIN"}]
+                })
+            })
+                .then(res => res.json())
+                .then(() => location.reload())
         }
-        modalUser.hide()
+    modalUser.hide()
     })
+
 
 
     /* Обрабатываем клик по кнопке Delete */
@@ -353,22 +380,7 @@
         }
         authUserTabHTMLInjection += "<td>" + roles + "</td>"
         authUserTabHTMLInjection += "<td>" + authUserFromRest.password + "</td>"
-        /*if (authUserFromRest.length > 0) {
-            for (let i = 0; i <= authUserFromRest.length - 1; i++) {
-                var roles = "";
-                authUserTabHTMLInjection += "<tr>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].id + "</td>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].name + "</td>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].lastName + "</td>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].age + "</td>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].email + "</td>";
-                for (let j = 0; j <= authUserFromRest[i].roles.length - 1; j++) {
-                    roles += authUserFromRest[i].roles[j].name + " ";
-                }
-                authUserTabHTMLInjection += "<td>" + roles + "</td>";
-                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].password + "</td>";
-            }*/
-            authUserTableBody.innerHTML = authUserTabHTMLInjection;
+        authUserTableBody.innerHTML = authUserTabHTMLInjection;
     }
 
 
