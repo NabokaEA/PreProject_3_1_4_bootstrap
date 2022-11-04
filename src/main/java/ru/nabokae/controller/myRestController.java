@@ -6,11 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokae.entity.User;
+import ru.nabokae.sequrity.UserDetailsImpl;
 import ru.nabokae.service.UserServiceImpl;
 import ru.nabokae.util.UserErrorResponse;
 import ru.nabokae.util.UserNotCreatedException;
@@ -34,7 +37,16 @@ public class myRestController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
+        logger.info("Запрошен список всех пользователей REST");
         return (List<User>) userService.findAllByOrderByIdAsc();
+    }
+
+    @GetMapping("/user")
+    public User getUser() {
+        logger.info("Запрошен авторизованный пользователь REST");
+        Authentication autentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) autentication.getPrincipal();
+        return userDetailsImpl.getUser();
     }
 
     @GetMapping("/user/{id}")

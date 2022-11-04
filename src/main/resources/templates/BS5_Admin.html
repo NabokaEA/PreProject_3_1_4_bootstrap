@@ -45,7 +45,26 @@
     </div>
     <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-             aria-labelledby="v-pills-profile-tab" tabindex="0">...
+             aria-labelledby="v-pills-profile-tab" tabindex="0">
+            <h3>User info</h3>
+            <!-- Содержимое вкладки User info верх -->
+            <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+                <table id="TableUser" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                    </thead>
+                    <tbody id="authUserTableBodyId">
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div sec:authorize="hasRole('ADMIN')" class="tab-pane fade  show active" id="v-pills-settings" role="tabpanel"
              aria-labelledby="v-pills-settings-tab"
@@ -83,7 +102,7 @@
                                 <th scope="col">Delete</th>
                             </tr>
                             </thead>
-                            <tbody id="allUsersTableBody">
+                            <tbody id="allUsersTableBodyId">
                             </tbody>
                         </table>
                     </div>
@@ -201,9 +220,12 @@
         crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
-    const restApiUsers = 'http://localhost:8187/api/users'
-    const usersTableBody = document.querySelector('tbody')
+    const restApiAllUsers = 'http://localhost:8187/api/users'
+    const restApiAuthUser = 'http://localhost:8187/api/user'
+    const usersTableBody = document.getElementById('allUsersTableBodyId')
+    const authUserTableBody = document.getElementById('authUserTableBodyId')
     let usersTabHTMLInjection = ''
+    let authUserTabHTMLInjection = ''
     const modalUser = new bootstrap.Modal(document.getElementById('modalUser'))
     const formEditUser = document.getElementById('modalEditAdd')
     const formEditCreateUserID = document.getElementById('user-ID')
@@ -215,25 +237,13 @@
     const formEditCreateUserRoles = document.getElementById('user-roles')
     let option = ''
 
-    /*/!* клик по кнопке add *!/
-    btnCreate.addEventListener('click', () => {
-        formEditCreateUserID.value = ''
-        formEditCreateUserName.value = ''
-        formEditCreateUserLastName.value = ''
-        formEditCreateUserAge.value = ''
-        formEditCreateUserEmail.value = ''
-        formEditCreateUserPass.value = ''
-        formEditCreateUserRoles.value = ''
-        option = 'Add'
-        modalUser.show()
-    })*/
+    /*TableUser, UserTableBody*/
 
     /*Обращение к REST контроллеру с запросом списка пользователей*/
-    fetch(restApiUsers)
+    fetch(restApiAllUsers)
         .then(response => response.json())
         .then(data => allUsersTab(data))
         .catch(error => console.log(error))
-
     /* Формирование HTML вставки с данными о пользователях, полученных от REST контроллера*/
     const allUsersTab = (allUsersFromRest) => {
         if (allUsersFromRest.length > 0) {
@@ -256,6 +266,8 @@
             usersTableBody.innerHTML = usersTabHTMLInjection;
         }
     }
+
+
 
     /* closest -Для каждого элемента в наборе получить первый элемент,
      соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
@@ -318,6 +330,46 @@
                 alertify.error('Cancel');
             });
     })
+
+    /*Обращение к REST контроллеру с запросом данных авторизованного пользователя*/
+    fetch(restApiAuthUser)
+        .then(response => response.json())
+        .then(data => authUserTable(data))
+        .catch(error => console.log(error))
+
+    /* Формирование HTML вставки с данными об автооризованном пользователе, полученных от REST контроллера*/
+    const authUserTable = (authUserFromRest) => {
+        console.log(authUserFromRest)
+        console.log(authUserFromRest.id)
+        var roles = ""
+        authUserTabHTMLInjection += "<tr>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.id + "</td>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.name + "</td>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.lastName + "</td>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.age + "</td>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.email + "</td>"
+        for (let j = 0; j <= authUserFromRest.roles.length - 1; j++) {
+            roles += authUserFromRest.roles[j].name + " "
+        }
+        authUserTabHTMLInjection += "<td>" + roles + "</td>"
+        authUserTabHTMLInjection += "<td>" + authUserFromRest.password + "</td>"
+        /*if (authUserFromRest.length > 0) {
+            for (let i = 0; i <= authUserFromRest.length - 1; i++) {
+                var roles = "";
+                authUserTabHTMLInjection += "<tr>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].id + "</td>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].name + "</td>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].lastName + "</td>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].age + "</td>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].email + "</td>";
+                for (let j = 0; j <= authUserFromRest[i].roles.length - 1; j++) {
+                    roles += authUserFromRest[i].roles[j].name + " ";
+                }
+                authUserTabHTMLInjection += "<td>" + roles + "</td>";
+                authUserTabHTMLInjection += "<td>" + authUserFromRest[i].password + "</td>";
+            }*/
+            authUserTableBody.innerHTML = authUserTabHTMLInjection;
+    }
 
 
 </script>

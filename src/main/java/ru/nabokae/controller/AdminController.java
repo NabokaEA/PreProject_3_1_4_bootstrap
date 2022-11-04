@@ -20,7 +20,7 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/app")
 public class AdminController {
     public static final Logger logger = LoggerFactory.getLogger(AdminController.class);
     private final UserService userService;
@@ -32,10 +32,10 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/all")
-    public String ListPage(Model model, User user) {
+    @GetMapping("/home")
+    public String HomePage(Model model, User user) {
         logger.info("Запрошен список пользьзователей");
-        model.addAttribute("usersAll", userService.findAllByOrderByIdAsc());
+       /* model.addAttribute("usersAll", userService.findAllByOrderByIdAsc());
         Authentication autentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetailsImpl = (UserDetailsImpl) autentication.getPrincipal();
         User userss=userDetailsImpl.getUser();
@@ -47,8 +47,7 @@ public class AdminController {
         }
         List<Role> roleList = roleService.findAll();
         model.addAttribute("PrincipalRoles", role);
-        model.addAttribute("AllRoles", roleList);
-
+        model.addAttribute("AllRoles", roleList);*/
         return "BS5_admin";
     }
 
