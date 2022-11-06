@@ -244,6 +244,7 @@
     const formCreateUserPass = document.getElementById('new-user-password')
     const formCreateUserRoles = document.getElementById('new-user-roles')
     let option = ''
+    let editRoleSelect = ''
 
     /* Util closest -Для каждого элемента в наборе получить первый элемент,
  соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
@@ -311,7 +312,14 @@
         modalUser.show()
     })
 
-    /* Обрабатываем клик по кнопке EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT...EDIT... */
+    formEditUserRoles.addEventListener('change', function(){
+        editRoleSelect = "ROLE_"+this.value
+        console.log(editRoleSelect)
+    })
+
+
+
+    /* Обрабатываем клик по кнопке SUBMIT */
     formEditUser.addEventListener('submit', (e) => {
         e.preventDefault()
         console.log(option)
@@ -330,7 +338,11 @@
                 password: formEditUserPass.value,
                 email: formEditUserEmail.value,
                 age: formEditUserAge.value,
-                roles: [{name: "ROLE_ADMIN"}]
+                roles: [{
+                    id:"",
+                    name:editRoleSelect,
+                    authority:editRoleSelect,
+                }]
             })
         })
             .then(res => res.json())
