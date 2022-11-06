@@ -33,13 +33,13 @@
 <div class="d-flex align-items-start">
     <div class="col-md-2">
         <div class="nav flex-column nav-pills me-3 mt-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button sec:authorize="hasRole('ADMIN')" class="nav-link  mt-2" id="v-pills-settings-tab"
-                    data-bs-toggle="pill" data-bs-target="#v-pills-settings"
-                    type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">Admin
-            </button>
             <button class="nav-link active pt-2" id="v-pills-profile-tab" data-bs-toggle="pill"
                     data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
                     aria-selected="true">User
+            </button>
+            <button sec:authorize="hasRole('ADMIN')" class="nav-link  mt-2" id="v-pills-settings-tab"
+                    data-bs-toggle="pill" data-bs-target="#v-pills-settings"
+                    type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">Admin
             </button>
         </div>
     </div>
