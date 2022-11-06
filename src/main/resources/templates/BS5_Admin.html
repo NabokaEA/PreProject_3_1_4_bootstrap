@@ -235,7 +235,7 @@
     const formEditUserEmail = document.getElementById('user-Email')
     const formEditUserPass = document.getElementById('user-password')
     const formEditUserRoles = document.getElementById('user-roles')
-
+    const formNewUserRoles = document.getElementById('new-user-roles')
     const formCreateUserID = document.getElementById('new-user-ID')
     const formCreateUserName = document.getElementById('new-user-name')
     const formCreateUserLastName = document.getElementById('new-user-lastName')
@@ -244,8 +244,8 @@
     const formCreateUserPass = document.getElementById('new-user-password')
     const formCreateUserRoles = document.getElementById('new-user-roles')
     let option = ''
-    let editRoleSelect = ''
-
+    let editUserRoleSelect = ''
+    let newUserRoleSelect = ''
     /* Util closest -Для каждого элемента в наборе получить первый элемент,
  соответствующий селектору, путем проверки самого элемента и обхода его предков в дереве DOM*/
     const on = (element, event, selector, handler) => {
@@ -313,8 +313,8 @@
     })
 
     formEditUserRoles.addEventListener('change', function(){
-        editRoleSelect = "ROLE_"+this.value
-        console.log(editRoleSelect)
+        editUserRoleSelect = "ROLE_"+this.value
+        console.log(editUserRoleSelect)
     })
 
 
@@ -340,8 +340,8 @@
                 age: formEditUserAge.value,
                 roles: [{
                     id:"",
-                    name:editRoleSelect,
-                    authority:editRoleSelect,
+                    name:editUserRoleSelect,
+                    authority:editUserRoleSelect
                 }]
             })
         })
@@ -364,6 +364,13 @@
 
     /*.................................Формирование вкладки добавления пользователя.........ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...ADD...........*/
     /* Обрабатываем клик по кнопке Add */
+
+
+    formNewUserRoles.addEventListener('change', function(){
+        newUserRoleSelect = "ROLE_"+this.value
+        console.log(newUserRoleSelect)
+    })
+
     formAddUser.addEventListener('submit', (e) => {
         e.preventDefault()
         console.log("Add User Event")
@@ -383,7 +390,10 @@
                 password: formCreateUserPass.value,
                 email: formCreateUserEmail.value,
                 age: formCreateUserAge.value,
-                roles: [{name: "ROLE_ADMIN"}]
+                roles: [{
+                    id:"",
+                    name:newUserRoleSelect,
+                }]
             })
         })
             .then(res => res.json())
