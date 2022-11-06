@@ -95,8 +95,9 @@ public class myRestController {
             }
             throw new UserNotCreatedException(errorMessage.toString());
         }
-
+        System.out.println(user.toString());
         userService.save(user);
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
