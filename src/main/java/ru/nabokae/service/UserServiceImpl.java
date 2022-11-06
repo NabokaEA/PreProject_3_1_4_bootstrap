@@ -10,7 +10,6 @@ import ru.nabokae.repository.RoleRepository;
 import ru.nabokae.repository.UserRepository;
 import ru.nabokae.entity.User;
 import ru.nabokae.sequrity.UserDetailsImpl;
-
 import javax.persistence.EntityManager;
 import java.util.Optional;
 

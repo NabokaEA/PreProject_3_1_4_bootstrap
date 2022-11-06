@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.nabokae.repository.RoleRepository;
 import ru.nabokae.repository.UserRepository;
 import ru.nabokae.entity.Role;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 @Service
